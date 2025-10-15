@@ -1,17 +1,21 @@
 # MS-todo(Microsoft To Do)
 #### 打造最漂亮的Microsoft To Do Chrome插件
 
-
 一个功能强大、界面美观的 Microsoft To Do 浏览器插件，在新标签页中提供无缝的任务管理体验。
 
-仅联网后可用
 
+<hr/>
+
+##### 安装地址：
+
+###### 仅联网后可用
 https://chromewebstore.google.com/detail/ms-todo-online/pgdehhmioheaemkhcfmmehmflfpaggne
 
-支持断网模式使用【功能强大，惊喜不断】：
-
+###### 支持断网模式使用【功能强大，惊喜不断】：
 https://chromewebstore.google.com/detail/ms-todo/icmnmeceeheemlmbmolfendmiieabiac
 
+
+<hr/>
 
 ##### ✨ 特性功能
 🔄 智能数据同步
