@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>Microsoft OAuth 回调</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+
+      if (!code) {
+        document.body.innerHTML = "<h2>❌ 未检测到授权码</h2>";
+        return;
+      }
+
+      try {
+        if (window.opener && !window.opener.closed) {
+          console.log("📡 向插件发送授权码...");
+          window.opener.postMessage({ type: "oauth_code", code }, "*");
+          document.body.innerHTML = "<h2>✅ 授权成功！正在通知插件...</h2>";
+          setTimeout(() => { try { window.close(); } catch {} }, 1000);
+          return;
+        }
+      } catch (e) {
+        console.warn("⚠️ postMessage 通信失败:", e);
+      }
+
+      document.body.innerHTML = `
+        <h2>授权成功！</h2>
+        <p>未检测到插件窗口，请手动复制授权码：</p>
+        <pre>${code}</pre>
+      `;
+    });
+  </script>
+</head>
+<body>
+  <h2>正在处理授权结果...</h2>
+</body>
+</html>
