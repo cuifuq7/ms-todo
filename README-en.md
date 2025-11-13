@@ -81,7 +81,7 @@ Manage all your tasks efficiently, directly from your new browser tab.
 ### 🧩 Installation
 
 **Option 1: Chrome Web Store (Recommended)**  
-- Visit the [Chrome Web Store](https://chromewebstore.google.com/)  
+- Visit the [Chrome Web Store]([https://chromewebstore.google.com/](https://chromewebstore.google.com/detail/ms-todo/icmnmeceeheemlmbmolfendmiieabiac))  
 - Click **Install** and enjoy  
 
 **Option 2: Manual Installation (For Developers)**  
