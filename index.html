@@ -70,7 +70,6 @@
             align-items: center;
             gap: 12px;
         }
-
         /* 添加超链接样式——覆盖整个logo区域 */
         .logo a {
             display: flex;
@@ -1198,7 +1197,8 @@
 </nav>
 
 <section class="hero">
-    <span class="version-badge"><i class="fa-solid fa-check-double"></i> Microsoft To Do 超级增强版</span>
+    <!-- ========== 1. 版本徽章添加 i18n 属性 ========== -->
+    <span class="version-badge" data-i18n="version-badge"><i class="fa-solid fa-check-double"></i> Microsoft To Do 超级增强版</span>
 
     <div id="dynamic-slogan"></div>
 
@@ -1241,25 +1241,25 @@
     </div>
 </section>
 
-<!-- ========== 新增瀑布流标语墙：从右到左 ========== -->
+<!-- ========== 2. 瀑布流标语墙：为每个 span 添加 data-i18n 以便切换时更新内容 ========== -->
 <section class="slogan-waterfall">
     <div class="waterfall-track">
-        <!-- 第一组标语 (5个核心卖点，包含您提供的5个icon句) -->
-        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span>节日不孤单，让烟花点亮你的待办心情</span></div>
-        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span>无论身在何处，登录永远快人一步</span></div>
-        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span>百万级任务，依然丝滑</span></div>
-        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span>离线编辑，联网自动同步</span></div>
-        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span>二级密码保护敏感列表</span></div>
+        <!-- 第一组标语 (5个核心卖点，包含您提供的5个icon句) 为每个文字span加上独立key -->
+        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span data-i18n="waterfall1">无论身在何处，登录永远快人一步</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span data-i18n="waterfall2">百万级任务，依然丝滑</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span data-i18n="waterfall3">离线编辑，联网自动同步</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span data-i18n="waterfall4">待办变导图，思路更清晰</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span data-i18n="waterfall5">二级密码保护敏感列表</span></div>
         <!-- 再加一条强调手机同步，增加丰富度 (可选) -->
-        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span> 手机App无缝同步</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span data-i18n="waterfall6">手机App无缝同步</span></div>
 
-        <!-- 第二组复制一份，以实现无限滚动错觉（内容完全一样，保证动画连续） -->
-        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>
-        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span>百万级任务，依然丝滑</span></div>
-        <!--        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span>离线编辑，联网自动同步</span></div>-->
-        <!--        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>-->
-        <!--        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span>二级密码保护敏感列表</span></div>-->
-        <!--        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span>手机App无缝同步</span></div>-->
+        <!-- 第二组复制一份，以实现无限滚动错觉（内容完全一样，保证动画连续） 同样加上i18n key，保持内容一致即可 -->
+        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span data-i18n="waterfall1">无论身在何处，登录永远快人一步</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span data-i18n="waterfall2">百万级任务，依然丝滑</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span data-i18n="waterfall3">离线编辑，联网自动同步</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span data-i18n="waterfall4">待办变导图，思路更清晰</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span data-i18n="waterfall5">二级密码保护敏感列表</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span data-i18n="waterfall6">手机App无缝同步</span></div>
     </div>
 </section>
 
@@ -1370,42 +1370,51 @@
     </div>
 </section>
 
+<!-- ========== 3. 主题区域：为每个标题和描述添加 i18n 属性 ========== -->
 <section class="theme-showcase" id="theme">
     <h2 class="section-title" data-i18n="theme-title">高级主题颜色定制</h2>
     <p class="section-subtitle" data-i18n="theme-subtitle">30+ 精心调校的色彩方案，总有一款适合你</p>
     <div class="theme-grid">
         <div class="theme-item">
             <div class="theme-color theme-blue"></div>
-            <h4>经典蓝</h4>
-            <p>沉稳专注</p></div>
+            <h4 data-i18n="theme-blue-title">经典蓝</h4>
+            <p data-i18n="theme-blue-desc">沉稳专注</p>
+        </div>
         <div class="theme-item">
             <div class="theme-color theme-purple"></div>
-            <h4>优雅紫</h4>
-            <p>创意灵感</p></div>
+            <h4 data-i18n="theme-purple-title">优雅紫</h4>
+            <p data-i18n="theme-purple-desc">创意灵感</p>
+        </div>
         <div class="theme-item">
             <div class="theme-color theme-green"></div>
-            <h4>森林绿</h4>
-            <p>清新自然</p></div>
+            <h4 data-i18n="theme-green-title">森林绿</h4>
+            <p data-i18n="theme-green-desc">清新自然</p>
+        </div>
         <div class="theme-item">
             <div class="theme-color theme-rose"></div>
-            <h4>玫瑰红</h4>
-            <p>热情活力</p></div>
+            <h4 data-i18n="theme-rose-title">玫瑰红</h4>
+            <p data-i18n="theme-rose-desc">热情活力</p>
+        </div>
         <div class="theme-item">
             <div class="theme-color theme-orange"></div>
-            <h4>暖阳橙</h4>
-            <p>温暖积极</p></div>
+            <h4 data-i18n="theme-orange-title">暖阳橙</h4>
+            <p data-i18n="theme-orange-desc">温暖积极</p>
+        </div>
         <div class="theme-item">
             <div class="theme-color theme-teal"></div>
-            <h4>薄荷绿</h4>
-            <p>清爽治愈</p></div>
+            <h4 data-i18n="theme-teal-title">薄荷绿</h4>
+            <p data-i18n="theme-teal-desc">清爽治愈</p>
+        </div>
         <div class="theme-item">
             <div class="theme-color theme-indigo"></div>
-            <h4>深海蓝</h4>
-            <p>深邃专业</p></div>
+            <h4 data-i18n="theme-indigo-title">深海蓝</h4>
+            <p data-i18n="theme-indigo-desc">深邃专业</p>
+        </div>
         <div class="theme-item">
             <div class="theme-color theme-gray"></div>
-            <h4>极简灰</h4>
-            <p>低调纯粹</p></div>
+            <h4 data-i18n="theme-gray-title">极简灰</h4>
+            <p data-i18n="theme-gray-desc">低调纯粹</p>
+        </div>
     </div>
 </section>
 
@@ -1533,7 +1542,7 @@
 
 <script>
     const i18n = {
-        'zh': { /* 省略完整内容以保持简洁，实际与原相同，此处保持原有对象结构 */
+        'zh': { /* 包含新增的版本徽章、瀑布流、主题和sloganList的中文翻译 */
             'nav-features': '功能特性', 'nav-showcase': '界面预览', 'nav-theme': '主题定制', 'nav-privacy': '安全隐私', 'nav-faq': '常见问题', 'nav-sponsor': '资助作者',
             'tagline-simple': '新标签页，新效率，新体验，新享受', 'tagline-emotional': '待办不该是负担，而是生活的节奏', 'hero-desc': 'Local-First · 离线优先 · 智能同步 · 思维导图 · 二级隐私锁',
             'btn-chrome': 'Chrome 商店', 'btn-edge': 'Edge 商店', 'btn-github': 'GitHub Release', 'btn-github-source': '查看源码', 'stat-themes': '颜色主题', 'stat-rating': '用户评分',
@@ -1552,7 +1561,26 @@
             'showcase-1-3': '四种排序规则', 'showcase-1-3-d': ' - 按时间、重要性灵活组织', 'showcase-1-4': '截止日期提醒', 'showcase-1-4-d': ' - 不错过任何重要事项',
             'showcase-quote-1': '新标签页，新效率，新体验，新享受', 'showcase-2-title': '思维导图视图', 'showcase-2-1': '一键转换', 'showcase-2-1-d': ' - 列表 ↔ 思维导图无缝切换',
             'showcase-2-2': '多级展示', 'showcase-2-2-d': ' - 任务与子任务层级清晰', 'showcase-2-3': '导出功能', 'showcase-2-3-d': ' - 支持 PNG / PDF 导出', 'showcase-2-4': '自由拖拽',
-            'showcase-2-4-d': ' - 平移查看，双击复位', 'showcase-quote-2': '待办不该是负担，而是生活的节奏', 'theme-title': '高级主题颜色定制', 'theme-subtitle': '30+ 精心调校的色彩方案，总有一款适合你',
+            'showcase-2-4-d': ' - 平移查看，双击复位', 'showcase-quote-2': '待办不该是负担，而是生活的节奏',
+            // 主题相关
+            'theme-title': '高级主题颜色定制', 'theme-subtitle': '30+ 精心调校的色彩方案，总有一款适合你',
+            'theme-blue-title': '经典蓝', 'theme-blue-desc': '沉稳专注',
+            'theme-purple-title': '优雅紫', 'theme-purple-desc': '创意灵感',
+            'theme-green-title': '森林绿', 'theme-green-desc': '清新自然',
+            'theme-rose-title': '玫瑰红', 'theme-rose-desc': '热情活力',
+            'theme-orange-title': '暖阳橙', 'theme-orange-desc': '温暖积极',
+            'theme-teal-title': '薄荷绿', 'theme-teal-desc': '清爽治愈',
+            'theme-indigo-title': '深海蓝', 'theme-indigo-desc': '深邃专业',
+            'theme-gray-title': '极简灰', 'theme-gray-desc': '低调纯粹',
+            // 版本徽章
+            'version-badge': '<i class="fa-solid fa-check-double"></i> Microsoft To Do 超级增强版',
+            // 瀑布流
+            'waterfall1': '无论身在何处，登录永远快人一步',
+            'waterfall2': '百万级任务，依然丝滑',
+            'waterfall3': '离线编辑，联网自动同步',
+            'waterfall4': '待办变导图，思路更清晰',
+            'waterfall5': '二级密码保护敏感列表',
+            'waterfall6': '手机App无缝同步',
             'p-title': '隐私与安全，我们的核心原则', 'p-desc': '我们深知待办事项往往包含个人敏感信息。MS-ToDo 采用以下技术保障您的数据安全：', 'p1-t': '数据自主控制：', 'p1-d': '所有敏感数据存储在本地 IndexedDB，不上传任何第三方服务器存储。',
             'p2-t': '透明同步流向：', 'p2-d': '仅与微软官方 API 和用户自选的代理节点通信，流量清晰可控。', 'p3-t': '本地锁保护：', 'p3-d': '私密列表支持二级密码访问，内容默认隐藏，需主动解锁查看。',
             'p4-t': '最小权限原则：', 'p4-d': '仅申请必要的 API 权限，无任何数据收集行为。', 'privacy-tagline': '你的私事，只有你知道 —— 二级密码保护敏感列表', 'tech-title': '技术架构', 'tech-subtitle': '现代 Web 技术打造，稳定可靠',
@@ -1629,8 +1657,34 @@
             'showcase-2-4': 'Free pan & zoom',
             'showcase-2-4-d': ' - pan to view, double-click to reset',
             'showcase-quote-2': 'To-dos are not burdens, but the rhythm of life',
+            // 主题相关英文
             'theme-title': 'Advanced Theme Customization',
             'theme-subtitle': '30+ carefully tuned color schemes, one is sure to fit you',
+            'theme-blue-title': 'Classic Blue',
+            'theme-blue-desc': 'Calm & Focused',
+            'theme-purple-title': 'Elegant Purple',
+            'theme-purple-desc': 'Creative Inspiration',
+            'theme-green-title': 'Forest Green',
+            'theme-green-desc': 'Fresh & Natural',
+            'theme-rose-title': 'Rosy Red',
+            'theme-rose-desc': 'Passionate & Energetic',
+            'theme-orange-title': 'Warm Orange',
+            'theme-orange-desc': 'Warm & Positive',
+            'theme-teal-title': 'Mint Green',
+            'theme-teal-desc': 'Refreshing & Soothing',
+            'theme-indigo-title': 'Deep Blue',
+            'theme-indigo-desc': 'Deep & Professional',
+            'theme-gray-title': 'Minimalist Gray',
+            'theme-gray-desc': 'Understated & Pure',
+            // 版本徽章英文
+            'version-badge': '<i class="fa-solid fa-check-double"></i> Microsoft To Do Supercharged Edition',
+            // 瀑布流英文
+            'waterfall1': 'Wherever you are, login is always one step ahead',
+            'waterfall2': 'Millions of tasks, still buttery smooth',
+            'waterfall3': 'Edit offline, auto-sync when online',
+            'waterfall4': 'To-dos to mind maps, clarity at a glance',
+            'waterfall5': 'Secondary password protects sensitive lists',
+            'waterfall6': 'Seamless sync with mobile app',
             'p-title': 'Privacy & Security, Our Core Principles',
             'p-desc': 'We know to-dos often contain personal info. MS-ToDo uses these technologies to protect your data:',
             'p1-t': 'Local Control: ',
@@ -1677,49 +1731,88 @@
         }
     };
 
-    const sloganList = [
-        "让每一次浏览器打开，都成为 productivity 的起点",
-        "📱手机App同步，移动办公无缝接力",
-        "⚡ 离线编辑，联网自动同步",
-        "🧠 待办一键变思维导图",
-        "🔒 二级隐私锁，你的私事只有你知道",
-        "🌏 无论身在何处，登录快人一步"
-    ];
+    // ========== 4. const sloganList 现在根据语言动态获取，因此我们仍然保留一个基础数组用于打字效果，但内容从 i18n 中动态读取 ==========
+    // 根据当前语言获取slogan列表
+    function getSloganListForLang(lang) {
+        if (lang === 'en') {
+            return [
+                "Make every browser tab the starting point of productivity",
+                "Mobile app sync, seamless mobile office",
+                "⚡ Edit offline, auto-sync when online",
+                "🧠 One-click to-dos to mind map",
+                "🔒 Secondary privacy lock — your private matters, only you know",
+                "🌏 Wherever you are, login one step ahead"
+            ];
+        } else {
+            return [
+                "让每一次浏览器打开，都成为 productivity 的起点",
+                "手机App同步，移动办公无缝接力",
+                "⚡ 离线编辑，联网自动同步",
+                "🧠 待办一键变思维导图",
+                "🔒 二级隐私锁，你的私事只有你知道",
+                "🌏 无论身在何处，登录快人一步"
+            ];
+        }
+    }
 
     let currentLang = navigator.language.startsWith('zh') ? 'zh' : 'en';
+    let sloganList = getSloganListForLang(currentLang);
+
     let sloganIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
+    let isPaused = false; // 新增：是否处于暂停状态
     const dynamicElement = document.getElementById('dynamic-slogan');
 
+    // 打字机效果函数
     function typeEffect() {
+        // 如果处于暂停状态，不执行任何操作（由setTimeout恢复）
+        if (isPaused) return;
+
         const currentFullText = sloganList[sloganIndex];
+
         if (isDeleting) {
+            // 删除字符 - 快速删除
             charIndex--;
             dynamicElement.innerText = currentFullText.substring(0, charIndex);
         } else {
+            // 打印字符 - 慢速打印
             charIndex++;
             dynamicElement.innerText = currentFullText.substring(0, charIndex);
         }
 
+        // 完成打印当前句子
         if (!isDeleting && charIndex === currentFullText.length) {
-            isDeleting = true;
-            setTimeout(typeEffect, 3500);
-        } else if (isDeleting && charIndex === 0) {
+            // 进入暂停状态，等待3秒后开始删除
+            isPaused = true;
+            isDeleting = true; // 暂停结束后将要删除
+            setTimeout(() => {
+                isPaused = false; // 解除暂停
+                typeEffect(); // 继续执行，此时 isDeleting = true，会开始删除
+            }, 3000); // 停顿3秒
+            return; // 退出当前函数，等待setTimeout唤醒
+        }
+        // 完成删除当前句子
+        else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             sloganIndex = (sloganIndex + 1) % sloganList.length;
-            setTimeout(typeEffect, 500);
-        } else {
-            const speed = isDeleting ? 80 : 150;
+            // 删除完成后切换到下一句，停顿800ms后开始打印下一句
+            setTimeout(typeEffect, 800);
+        }
+        // 正常打印或删除过程中
+        else {
+            const speed = isDeleting ? 80 : 400;
             setTimeout(typeEffect, speed);
         }
     }
 
+    // 启动打字机效果
     if (dynamicElement) {
         dynamicElement.innerHTML = '';
         setTimeout(() => typeEffect(), 200);
     }
 
+    // 语言切换时更新sloganList并重启效果
     function updateContent() {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -1727,11 +1820,26 @@
                 if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                     el.placeholder = i18n[currentLang][key];
                 } else {
-                    el.innerText = i18n[currentLang][key];
+                    if (key === 'version-badge') {
+                        el.innerHTML = i18n[currentLang][key];
+                    } else {
+                        el.innerText = i18n[currentLang][key];
+                    }
                 }
             }
         });
         document.getElementById('lang-btn-text').innerText = currentLang === 'zh' ? 'English' : '中文';
+
+        // 切换语言后更新sloganList并重启打字效果
+        sloganList = getSloganListForLang(currentLang);
+        sloganIndex = 0;
+        charIndex = 0;
+        isDeleting = false;
+        isPaused = false;
+        if (dynamicElement) {
+            dynamicElement.innerHTML = '';
+            setTimeout(() => typeEffect(), 100);
+        }
     }
 
     function toggleLanguage() {
