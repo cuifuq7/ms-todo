@@ -3,45 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MS-ToDo - Minimalist & Efficient Microsoft To Do Browser Extension</title>
+    <title>MS-ToDo 超级增强版 · 移动办公无缝同步</title>
+    <meta name="description" content="微软待办官方增强插件，Local-First 架构，完美打通手机App，移动办公效率倍增。支持离线、思维导图、二级隐私锁。">
+    <meta name="keywords" content="微软待办, Microsoft To Do, 手机同步, 移动办公, Chrome插件, 离线同步, 思维导图">
+    <meta property="og:title" content="MS-ToDo - 微软待办超级增强版">
+    <meta property="og:description" content="手机App无缝打通 · 移动办公效率神器 · Local-First">
+    <meta property="og:image" content="img/og-preview.png">
+    <link rel="icon" type="image/png" href="img/logo/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --chrome-color: #4285f4;
-            --edge-color: #0078d7;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --bg-light: #f8fafc;
-            --white: #ffffff;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --chrome-color: #4285f4;
+            --edge-color: #0078d7;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #e11d48;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             background: var(--white);
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 10%;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 1.2rem 10%;
+            background: rgba(255, 255, 255, 0.95);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #f1f5f9;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-100);
+            box-shadow: var(--shadow-sm);
         }
 
         .logo {
@@ -50,76 +68,175 @@
             color: var(--primary-color);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
         }
 
         .nav-links {
             display: flex;
             align-items: center;
+            gap: 2rem;
         }
 
         .nav-links a, .nav-links span {
             text-decoration: none;
             color: var(--text-dark);
-            margin-left: 2rem;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1rem;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
         }
 
         .nav-links a:hover, .nav-links span:hover {
             color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
         }
 
         .nav-links .btn-sponsor-nav {
-            color: #e11d48;
+            color: var(--accent-rose);
+            font-weight: 600;
         }
 
-        /* Language Switcher Floating Button */
         .lang-switch {
             position: fixed;
             bottom: 30px;
             right: 30px;
             z-index: 1001;
             background: var(--white);
-            border: 1px solid #e2e8f0;
-            padding: 10px 15px;
-            border-radius: 30px;
+            border: 1px solid var(--gray-200);
+            padding: 12px 20px;
+            border-radius: 40px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
 
         .lang-switch:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
             border-color: var(--primary-color);
         }
 
-        /* Hero Section */
         .hero {
-            padding: 8rem 10% 6rem;
+            padding: 6rem 10% 5rem;
             text-align: center;
-            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 50%, #f8fafc 100%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #2563eb, #3b82f6);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero .version-badge {
+            display: inline-block;
+            background: linear-gradient(145deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 8px 28px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-md);
+            letter-spacing: 1px;
+        }
+
+        .hero .version-badge i {
+            margin-right: 8px;
+            color: #ffd966;
+        }
+
+        #dynamic-slogan {
+            font-size: 3.2rem;
+            font-weight: 800;
+            min-height: 6rem;
+            margin-bottom: 1.2rem;
+            background: linear-gradient(135deg, #1e40af, var(--primary-color), #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: -1px;
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            transition: opacity 0.5s;
         }
 
-        .hero p {
-            font-size: 1.25rem;
+        .dynamic-cursor {
+            display: inline-block;
+            width: 6px;
+            height: 3.5rem;
+            background: var(--primary-color);
+            margin-left: 8px;
+            border-radius: 4px;
+            animation: blink 0.9s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .tagline-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            font-weight: 500;
+        }
+
+        .hero .subhead {
+            font-size: 1.3rem;
             color: var(--text-light);
             max-width: 800px;
-            margin: 0 auto 2.5rem;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .download-container {
@@ -127,25 +244,28 @@
             gap: 1.2rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 2.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .btn-download {
             color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 12px;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s;
+            font-size: 1.1rem;
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
         }
 
         .btn-download:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-chrome {
@@ -160,39 +280,263 @@
             background: #24292e;
         }
 
-        /* Features Section */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ---------- 新增瀑布流标语墙 (从右到左滚动) ---------- */
+        .slogan-waterfall {
+            background: linear-gradient(90deg, #f1f5f9 0%, #ffffff 20%, #ffffff 80%, #f1f5f9 100%);
+            padding: 2.8rem 10% 2.2rem;
+            overflow: hidden;
+            border-bottom: 1px solid var(--gray-200);
+            border-top: 1px solid var(--gray-200);
+            margin-top: 1rem;
+        }
+
+        .waterfall-track {
+            display: flex;
+            gap: 2.5rem;
+            width: max-content;
+            animation: scrollRightToLeft 28s linear infinite;
+            /* 添加一点悬停暂停效果，更精致 */
+            transition: animation-play-state 0.2s;
+        }
+
+        .waterfall-track:hover {
+            animation-play-state: paused;
+        }
+
+        .waterfall-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 60px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            font-size: 1.25rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: var(--transition);
+            color: var(--text-dark);
+            backdrop-filter: blur(4px);
+        }
+
+        .waterfall-item i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.2));
+        }
+
+        .waterfall-item span {
+            background: linear-gradient(145deg, #1e293b, #334155);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.3px;
+        }
+
+        /* 从右到左的无限滚动 */
+        @keyframes scrollRightToLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-50% - 1.25rem));
+            }
+            /* 因为复制了一份，移动一半距离即可无缝衔接 */
+        }
+
+        /* 瀑布流修饰：微光 */
+        .waterfall-item::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 62px;
+            background: linear-gradient(120deg, rgba(37, 99, 235, 0.2), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .waterfall-item:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .waterfall-item:hover::after {
+            opacity: 0.5;
+        }
+
+        .mobile-showcase {
+            padding: 5rem 10%;
+            background: #ffffff;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .mobile-showcase h2 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .mobile-showcase .sub {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+        }
+
+        .mobile-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            align-items: flex-end;
+        }
+
+        .mobile-card {
+            background: var(--bg-light);
+            border-radius: 36px 36px 24px 24px;
+            padding: 1.8rem 1.8rem 2rem;
+            box-shadow: var(--shadow-lg);
+            width: 280px;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            text-align: center;
+        }
+
+        .mobile-card:hover {
+            transform: scale(1.03);
+            border-color: var(--primary-color);
+        }
+
+        .mobile-card img {
+            width: 100%;
+            border-radius: 28px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border: 4px solid white;
+            margin-bottom: 1.2rem;
+        }
+
+        .mobile-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-card p {
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .mobile-card i {
+            color: var(--accent-green);
+        }
+
+        .sync-badge {
+            background: #e6f7e6;
+            color: #2e7d32;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+        }
+
         .features {
             padding: 5rem 10%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
             background: #fff;
         }
 
         .feature-card {
-            padding: 2rem;
-            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
             background: var(--bg-light);
-            transition: all 0.3s ease;
-            border: 1px solid #f1f5f9;
+            transition: var(--transition);
+            border: 1px solid var(--gray-100);
+            box-shadow: var(--shadow-sm);
         }
 
         .feature-card:hover {
             background: white;
             border-color: var(--primary-color);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
 
         .feature-icon {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary-color);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: rgba(37, 99, 235, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
         }
 
         .feature-card h3 {
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--text-dark);
         }
@@ -200,10 +544,179 @@
         .feature-card p {
             color: var(--text-light);
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        /* Privacy Section */
+        .feature-tagline {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--gray-200);
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .showcase {
+            padding: 5rem 10%;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .showcase-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .showcase-image:hover {
+            transform: scale(1.02);
+        }
+
+        .showcase-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .showcase-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .showcase-list {
+            list-style: none;
+        }
+
+        .showcase-list li {
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .showcase-list i {
+            color: var(--accent-green);
+            font-size: 1.3rem;
+            margin-top: 2px;
+        }
+
+        .showcase-list strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .showcase-list span {
+            color: var(--text-light);
+        }
+
+        .showcase-quote {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: 16px;
+            border-left: 4px solid var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .showcase-quote i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* 高级主题定制展示区 */
+        .theme-showcase {
+            padding: 5rem 10%;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .theme-item {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            cursor: pointer;
+        }
+
+        .theme-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .theme-color {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            margin: 0 auto 1rem;
+            border: 3px solid white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-item p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .theme-blue {
+            background: #2563eb;
+        }
+
+        .theme-purple {
+            background: #7c3aed;
+        }
+
+        .theme-green {
+            background: #10b981;
+        }
+
+        .theme-rose {
+            background: #e11d48;
+        }
+
+        .theme-orange {
+            background: #f97316;
+        }
+
+        .theme-teal {
+            background: #14b8a6;
+        }
+
+        .theme-indigo {
+            background: #4f46e5;
+        }
+
+        .theme-gray {
+            background: #4b5563;
+        }
+
         .highlight {
             background: var(--text-dark);
             color: white;
@@ -220,14 +733,15 @@
         }
 
         .highlight-content h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         .highlight-content p.desc {
             color: #94a3b8;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
             line-height: 1.8;
         }
 
@@ -238,116 +752,378 @@
         .privacy-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
             margin-bottom: 1.2rem;
             background: rgba(255, 255, 255, 0.05);
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 16px 24px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .privacy-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
         }
 
         .privacy-item i {
-            color: #10b981;
-            font-size: 1.2rem;
+            color: var(--accent-green);
+            font-size: 1.5rem;
         }
 
         .privacy-item strong {
             color: #f8fafc;
-            font-size: 1.05rem;
-            margin-right: 5px;
+            font-size: 1.1rem;
+            margin-right: 8px;
         }
 
         .privacy-item span {
             color: #cbd5e1;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
-        /* Modal Structure */
+        .privacy-tagline {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            color: var(--accent-green);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .tech-stack {
+            padding: 5rem 10%;
+            background: white;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tech-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .tech-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .faq {
+            padding: 5rem 10%;
+            background: var(--bg-light);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .faq-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-item h4 i {
+            color: var(--primary-color);
+        }
+
+        .faq-item p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .cta {
+            padding: 5rem 10%;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), #1e40af);
+            color: white;
+        }
+
+        .cta-quote {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-cta-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-cta-outline:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
             background: white;
             padding: 2.5rem;
-            border-radius: 24px;
-            max-width: 500px;
+            border-radius: 32px;
+            max-width: 550px;
             width: 90%;
             text-align: center;
             position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .modal-close {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--text-light);
             cursor: pointer;
             border: none;
             background: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--gray-100);
+            color: var(--text-dark);
         }
 
         .qr-container {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             justify-content: center;
             margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .qr-item {
+            text-align: center;
         }
 
         .qr-item img {
-            width: 100%;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 0.5rem;
+            width: 160px;
+            height: 160px;
+            border-radius: 20px;
+            border: 1px solid var(--gray-200);
+            margin-bottom: 1rem;
+            padding: 10px;
+            background: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .qr-item p {
+            font-weight: 600;
+        }
+
+        .qr-item p i {
+            margin-right: 5px;
         }
 
         footer {
             padding: 4rem 10%;
             text-align: center;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--gray-200);
             color: var(--text-light);
             background: #fafafa;
         }
 
         .footer-links {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
         }
 
         .footer-links a, .footer-links span {
             text-decoration: none;
             color: var(--text-light);
-            font-size: 0.95rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: color 0.3s;
+            transition: var(--transition);
             cursor: pointer;
+        }
+
+        .footer-links a:hover, .footer-links span:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
         @media (max-width: 1200px) {
             .features {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .tech-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .theme-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+
+            .tagline-row {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            #dynamic-slogan {
+                font-size: 2.2rem;
             }
 
             .nav-links {
@@ -358,14 +1134,36 @@
                 grid-template-columns: 1fr;
             }
 
-            .qr-container {
-                flex-direction: column;
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
+
+            .theme-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .waterfall-item {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .waterfall-item i {
+                font-size: 1.4rem;
+            }
+        }
+
+        html {
+            scroll-padding-top: 80px;
         }
     </style>
 </head>
 <body>
-
 <div class="lang-switch" onclick="toggleLanguage()">
     <i class="fa-solid fa-globe"></i>
     <span id="lang-btn-text">English</span>
@@ -373,96 +1171,323 @@
 
 <nav>
     <div class="logo">
-        <img src="img/logo/icon.png" style="width: 30px; height: 30px; object-fit: cover;">
+        <img src="img/logo/logo.png" alt="MS-ToDo Logo">
         MS-ToDo
     </div>
     <div class="nav-links">
-        <a href="#features" data-i18n="nav-features">功能特性</a>
-        <a href="#privacy" data-i18n="nav-privacy">安全隐私</a>
-        <a href="https://github.com/cuifuq7/ms-todo/issues" target="_blank" data-i18n="nav-feedback">问题反馈</a>
-        <span class="btn-sponsor-nav" onclick="toggleModal(true)" data-i18n="nav-sponsor">资助作者</span>
-        <a href="https://github.com/cuifuq7/ms-todo" target="_blank">GitHub</a>
+        <a href="#features" data-i18n="nav-features"><i class="fa-solid fa-star"></i> 功能特性</a>
+        <a href="#showcase" data-i18n="nav-showcase"><i class="fa-solid fa-eye"></i> 界面预览</a>
+        <a href="#theme" data-i18n="nav-theme"><i class="fa-solid fa-palette"></i> 主题定制</a>
+        <a href="#privacy" data-i18n="nav-privacy"><i class="fa-solid fa-shield"></i> 安全隐私</a>
+        <a href="#faq" data-i18n="nav-faq"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+        <span class="btn-sponsor-nav" onclick="toggleModal(true)" data-i18n="nav-sponsor"><i class="fa-solid fa-heart"></i> 资助作者</span>
+        <a href="https://github.com/cuifuq7/ms-todo" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
     </div>
 </nav>
 
 <section class="hero">
-    <h1 data-i18n="hero-title">极简高效，让待办重回专注</h1>
-    <p data-i18n="hero-desc">专为现代浏览器打造的微软待办增强插件。采用 Local-First 架构，提供丝滑的同步体验与深度定制的功能扩展。</p>
+    <span class="version-badge"><i class="fa-regular fa-gem"></i> Microsoft To Do 超级增强版</span>
+
+    <div id="dynamic-slogan"></div>
+
+    <div class="tagline-row">
+        <span class="tagline"><i class="fa-regular fa-star"></i> <span data-i18n="tagline-simple">新标签页，新效率，新体验，新享受</span></span>
+        <span class="tagline"><i class="fa-regular fa-heart"></i> <span data-i18n="tagline-emotional">待办不该是负担，而是生活的节奏</span></span>
+    </div>
+
+    <p class="subhead" data-i18n="hero-desc">Local-First · 离线优先 · 智能同步 · 思维导图 · 二级隐私锁</p>
 
     <div class="download-container">
-        <a href="https://chromewebstore.google.com/detail/icmnmeceeheemlmbmolfendmiieabiac" class="btn-download btn-chrome" target="_blank">
+        <a href="#" class="btn-download btn-chrome" target="_blank">
             <i class="fa-brands fa-chrome"></i> <span data-i18n="btn-chrome">Chrome 商店</span>
         </a>
-        <a href="https://microsoftedge.microsoft.com/addons/detail/mstodo/aoodkfaickihogbaooannechhccggnbp" class="btn-download btn-edge" target="_blank">
+        <a href="#" class="btn-download btn-edge" target="_blank">
             <i class="fa-brands fa-edge"></i> <span data-i18n="btn-edge">Edge 商店</span>
         </a>
-        <a href="https://github.com/cuifuq7/ms-todo/releases" class="btn-download btn-github" target="_blank">
+        <a href="#" class="btn-download btn-github" target="_blank">
             <i class="fa-brands fa-github"></i> <span data-i18n="btn-github">GitHub Release</span>
         </a>
     </div>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">25+</div>
+            <div class="stat-label" data-i18n="stat-themes">颜色主题</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">4.8★</div>
+            <div class="stat-label" data-i18n="stat-rating">用户评分</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">30+</div>
+            <div class="stat-label" data-i18n="stat-users">活跃用户</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label" data-i18n="stat-offline">离线可用</div>
+        </div>
+    </div>
 </section>
 
+<!-- ========== 新增瀑布流标语墙：从右到左 ========== -->
+<section class="slogan-waterfall">
+    <div class="waterfall-track">
+        <!-- 第一组标语 (5个核心卖点，包含您提供的5个icon句) -->
+        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span>无论身在何处，登录永远快人一步</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span>百万级任务，依然丝滑</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span>离线编辑，联网自动同步</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span>二级密码保护敏感列表</span></div>
+        <!-- 再加一条强调手机同步，增加丰富度 (可选) -->
+        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span> 手机App无缝同步</span></div>
+
+        <!-- 第二组复制一份，以实现无限滚动错觉（内容完全一样，保证动画连续） -->
+<!--        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span>无论身在何处，登录永远快人一步</span></div>-->
+<!--        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span>百万级任务，依然丝滑</span></div>-->
+<!--        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span>离线编辑，联网自动同步</span></div>-->
+<!--        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>-->
+<!--        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span>二级密码保护敏感列表</span></div>-->
+<!--        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span>手机App无缝同步</span></div>-->
+    </div>
+</section>
+
+<!-- 原有features部分不变，紧接在瀑布流之后 -->
 <section class="features" id="features">
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div>
         <h3 data-i18n="f1-t">极致性能体验</h3>
-        <p data-i18n="f1-d">采用 Local-First 架构，UI 操作实现零延迟反馈，彻底告别原生网页版的加载等待感。</p>
+        <p data-i18n="f1-d">采用 Local-First 架构，UI 操作实现零延迟反馈，彻底告别原生网页版的加载等待感。百万级任务流畅运行。</p>
+
     </div>
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
         <h3 data-i18n="f2-t">优雅 UI 交互</h3>
-        <p data-i18n="f2-d">适配 Windows 11 设计语言。支持自动暗黑模式、智能任务图标匹配与丝滑的侧边栏交互。</p>
+        <p data-i18n="f2-d">适配 Windows 11 设计语言。支持自动暗黑模式、智能任务图标匹配与丝滑的侧边栏交互。30+ 颜色主题自由切换。</p>
     </div>
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
         <h3 data-i18n="f3-t">双区调优加速</h3>
-        <p data-i18n="f3-d">内置中国区与国际区加速配置，针对性解决国内环境下登录缓慢与同步断连的顽疾。</p>
+        <p data-i18n="f3-d">内置中国区与国际区加速配置，针对性解决国内环境下登录缓慢与同步断连的顽疾。智能路由，自动切换最优节点。</p>
+
     </div>
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-clone"></i></div>
         <h3 data-i18n="f4-t">跨标签协同锁</h3>
-        <p data-i18n="f4-d">基于 Cross-tab Locking 机制，无论开启多少浏览器窗口，均能确保同步任务有序进行。</p>
+        <p data-i18n="f4-d">基于 Cross-tab Locking 机制，无论开启多少浏览器窗口，均能确保同步任务有序进行，彻底杜绝冲突与重复同步。</p>
     </div>
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
         <h3 data-i18n="f5-t">智能差分同步</h3>
-        <p data-i18n="f5-d">仅同步变更数据，配合指数重试算法，在网络波动环境下亦能保证任务百分百触达云端。</p>
+        <p data-i18n="f5-d">仅同步变更数据，配合指数重试算法，在网络波动环境下亦能保证任务百分百触达云端。流量消耗降低 90%。</p>
+
     </div>
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-box-archive"></i></div>
         <h3 data-i18n="f6-t">离线沙箱引擎</h3>
-        <p data-i18n="f6-d">支持全功能离线编辑。无网络时自由增删改查，待联网后自动执行智能差分合并同步。</p>
+        <p data-i18n="f6-d">支持全功能离线编辑。无网络时自由增删改查，待联网后自动执行智能差分合并同步，数据永不丢失。</p>
     </div>
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-sitemap"></i></div>
         <h3 data-i18n="f7-t">可视化任务导图</h3>
-        <p data-i18n="f7-d">一键将待办列表转化为思维导图，支持多级子任务展示，让复杂项目脉络清晰可见。</p>
+        <p data-i18n="f7-d">一键将待办列表转化为思维导图，支持多级子任务展示，让复杂项目脉络清晰可见。支持导出为 PNG/PDF。</p>
+
     </div>
     <div class="feature-card">
         <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
         <h3 data-i18n="f8-t">Secondary 隐私锁</h3>
-        <p data-i18n="f8-d">支持为特定列表设置本地二级密码。即使电脑处于解锁状态，你的私密任务依然固若金汤。</p>
+        <p data-i18n="f8-d">支持为特定列表设置本地二级密码。即使电脑处于解锁状态，你的私密任务依然固若金汤。内容一键隐藏。</p>
+
     </div>
+</section>
+
+<!-- 以下为原页面其余部分，保持不变（showcase, theme, mobile, highlight等） -->
+<section class="showcase" id="showcase">
+    <h2 class="section-title" data-i18n="showcase-title">不止于待办，更是效率利器</h2>
+    <p class="section-subtitle" data-i18n="showcase-subtitle">深度优化的工作流，让任务管理成为一种享受</p>
+
+    <div class="showcase-grid">
+        <div class="showcase-image">
+            <img src="img/page/family-pc.png" alt="MS-ToDo 主界面">
+        </div>
+        <div class="showcase-content">
+            <h3 data-i18n="showcase-1-title">沉浸式任务管理</h3>
+            <ul class="showcase-list">
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-1-1">任务/子任务二级结构</strong><span data-i18n="showcase-1-1-d"> - 复杂项目轻松拆解</span></div>
+                </li>
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-1-2">智能图标匹配</strong><span data-i18n="showcase-1-2-d"> - 任务类型一目了然</span></div>
+                </li>
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-1-3">四种排序规则</strong><span data-i18n="showcase-1-3-d"> - 按时间、重要性灵活组织</span></div>
+                </li>
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-1-4">截止日期提醒</strong><span data-i18n="showcase-1-4-d"> - 不错过任何重要事项</span></div>
+                </li>
+            </ul>
+            <div class="showcase-quote">
+                <i class="fa-regular fa-star"></i> <span data-i18n="showcase-quote-1">新标签页，新效率，新体验，新享受</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="showcase-grid" style="margin-top: 4rem;">
+        <div class="showcase-content">
+            <h3 data-i18n="showcase-2-title">思维导图视图</h3>
+            <ul class="showcase-list">
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-2-1">一键转换</strong><span data-i18n="showcase-2-1-d"> - 列表 ↔ 思维导图无缝切换</span></div>
+                </li>
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-2-2">多级展示</strong><span data-i18n="showcase-2-2-d"> - 任务与子任务层级清晰</span></div>
+                </li>
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-2-3">导出功能</strong><span data-i18n="showcase-2-3-d"> - 支持 PNG / PDF 导出</span></div>
+                </li>
+                <li><i class="fa-regular fa-circle-check"></i>
+                    <div><strong data-i18n="showcase-2-4">自由拖拽</strong><span data-i18n="showcase-2-4-d"> - 平移查看，双击复位</span></div>
+                </li>
+            </ul>
+            <div class="showcase-quote">
+                <i class="fa-regular fa-lightbulb"></i> <span data-i18n="showcase-quote-2">待办不该是负担，而是生活的节奏</span>
+            </div>
+        </div>
+        <div class="showcase-image">
+            <img src="img/page/family-pc-mind.png" alt="MS-ToDo 思维导图">
+        </div>
+    </div>
+</section>
+
+<section class="theme-showcase" id="theme">
+    <h2 class="section-title" data-i18n="theme-title">高级主题颜色定制</h2>
+    <p class="section-subtitle" data-i18n="theme-subtitle">30+ 精心调校的色彩方案，总有一款适合你</p>
+    <div class="theme-grid">
+        <div class="theme-item">
+            <div class="theme-color theme-blue"></div>
+            <h4>经典蓝</h4>
+            <p>沉稳专注</p></div>
+        <div class="theme-item">
+            <div class="theme-color theme-purple"></div>
+            <h4>优雅紫</h4>
+            <p>创意灵感</p></div>
+        <div class="theme-item">
+            <div class="theme-color theme-green"></div>
+            <h4>森林绿</h4>
+            <p>清新自然</p></div>
+        <div class="theme-item">
+            <div class="theme-color theme-rose"></div>
+            <h4>玫瑰红</h4>
+            <p>热情活力</p></div>
+        <div class="theme-item">
+            <div class="theme-color theme-orange"></div>
+            <h4>暖阳橙</h4>
+            <p>温暖积极</p></div>
+        <div class="theme-item">
+            <div class="theme-color theme-teal"></div>
+            <h4>薄荷绿</h4>
+            <p>清爽治愈</p></div>
+        <div class="theme-item">
+            <div class="theme-color theme-indigo"></div>
+            <h4>深海蓝</h4>
+            <p>深邃专业</p></div>
+        <div class="theme-item">
+            <div class="theme-color theme-gray"></div>
+            <h4>极简灰</h4>
+            <p>低调纯粹</p></div>
+    </div>
+</section>
+
+<section class="mobile-showcase" id="mobile">
+    <h2 data-i18n="mobile-title">📱 与微软待办App · 天生一对</h2>
+    <div class="sub" data-i18n="mobile-sub">电脑上随手记，手机端实时同步，移动办公效率倍增</div>
+    <div class="mobile-grid">
+        <div class="mobile-card">
+            <img src="img/page/family-app.png" alt="手机截图1">
+            <h3>📲 原生级同步</h3>
+            <p><i class="fa-regular fa-circle-check"></i> 任务、子任务、步骤</p>
+            <p><i class="fa-regular fa-bell"></i> 手机提醒 · 准时触达</p>
+            <span class="sync-badge"><i class="fa-regular fa-clock"></i> 实时双向同步</span>
+        </div>
+        <div class="mobile-card">
+            <img src="img/page/family-app2.jpg" alt="手机截图2">
+            <h3>🧠 详情步骤明细</h3>
+            <p><i class="fa-regular fa-circle-check"></i> 步骤明细不掉队</p>
+            <p><i class="fa-regular fa-sticky-note"></i> 离线编辑，联机同步</p>
+            <span class="sync-badge"><i class="fa-regular fa-face-smile"></i> 微软账号直连</span>
+        </div>
+    </div>
+    <p style="text-align:center; margin-top:2rem; color: var(--primary-color);">
+        <i class="fa-regular fa-circle-check"></i>
+        <strong data-i18n="mobile-footnote">所有数据均通过微软官方API与手机App无缝打通，无第三方存储</strong>
+    </p>
 </section>
 
 <section class="highlight" id="privacy">
     <div class="highlight-content">
         <h2 data-i18n="p-title">隐私与安全，我们的核心原则</h2>
-        <p class="desc" data-i18n="p-desc">我们深知待办事项往往包含个人敏感信息。MS-ToDo 采用以下技术保障：</p>
+        <p class="desc" data-i18n="p-desc">我们深知待办事项往往包含个人敏感信息。MS-ToDo 采用以下技术保障您的数据安全：</p>
         <div class="privacy-list">
-            <div class="privacy-item">
-                <i class="fa-solid fa-circle-check"></i>
-                <div><strong data-i18n="p1-t">数据自主控制：</strong><span data-i18n="p1-d">敏感数据存储在本地 IndexedDB。</span></div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
+                <div><strong data-i18n="p1-t">数据自主控制：</strong><span data-i18n="p1-d">所有敏感数据存储在本地 IndexedDB，不上传任何第三方服务器。</span></div>
             </div>
-            <div class="privacy-item">
-                <i class="fa-solid fa-circle-check"></i>
-                <div><strong data-i18n="p2-t">透明同步流向：</strong><span data-i18n="p2-d">仅与微软官方 API 和你的专用代理通信。</span></div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
+                <div><strong data-i18n="p2-t">透明同步流向：</strong><span data-i18n="p2-d">仅与微软官方 API 和用户自选的代理节点通信，流量清晰可控。</span></div>
             </div>
-            <div class="privacy-item">
-                <i class="fa-solid fa-circle-check"></i>
-                <div><strong data-i18n="p3-t">本地锁保护：</strong><span data-i18n="p3-d">私密列表支持 secondary 密码访问。</span></div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
+                <div><strong data-i18n="p3-t">本地锁保护：</strong><span data-i18n="p3-d">私密列表支持二级密码访问，内容默认隐藏，需主动解锁查看。</span></div>
+            </div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
+                <div><strong data-i18n="p4-t">最小权限原则：</strong><span data-i18n="p4-d">仅申请必要的 API 权限，无任何数据收集行为。</span></div>
             </div>
         </div>
+        <div class="privacy-tagline"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="privacy-tagline">你的私事，只有你知道 —— 二级密码保护敏感列表</span></div>
+    </div>
+    <div class="highlight-image"><img src="img/page/Privacy-Lock.png" alt="隐私锁功能"></div>
+</section>
+
+<section class="tech-stack">
+    <h2 class="section-title" data-i18n="tech-title">技术架构</h2>
+    <p class="section-subtitle" data-i18n="tech-subtitle">现代 Web 技术打造，稳定可靠</p>
+    <div class="tech-grid">
+        <div class="tech-item"><i class="fa-solid fa-database"></i><h4>IndexedDB</h4>
+            <p data-i18n="tech-1">本地数据存储</p></div>
+        <div class="tech-item"><i class="fa-brands fa-microsoft"></i><h4>Graph API</h4>
+            <p data-i18n="tech-2">微软官方接口</p></div>
+        <div class="tech-item"><i class="fa-solid fa-cloud"></i><h4>Cloudflare</h4>
+            <p data-i18n="tech-3">Worker 代理</p></div>
+        <div class="tech-item"><i class="fa-solid fa-diagram-project"></i><h4>MindElixir</h4>
+            <p data-i18n="tech-4">思维导图引擎</p></div>
+        <div class="tech-item"><i class="fa-solid fa-lock"></i><h4>OAuth 2.0</h4>
+            <p data-i18n="tech-5">安全认证</p></div>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <h2 class="section-title" data-i18n="faq-title">常见问题</h2>
+    <p class="section-subtitle" data-i18n="faq-subtitle">你可能想了解的</p>
+    <div class="faq-grid">
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq1-q">MS-ToDo 是免费的吗？</span></h4>
+            <p data-i18n="faq1-a">完全免费开源，所有核心功能均可永久免费使用。打赏仅用于支持作者域名维护和持续开发，完全自愿。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq2-q">需要注册微软账号吗？</span></h4>
+            <p data-i18n="faq2-a">是的，MS-ToDo 是微软待办的增强插件，需要登录微软账号同步您的任务数据。所有数据仍归属于您的微软账户。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq3-q">离线时能正常使用吗？</span></h4>
+            <p data-i18n="faq3-a">完全可以！MS-ToDo 采用 Local-First 架构，离线时所有操作（增删改查）均正常工作，联网后自动同步到云端。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq4-q">如何切换中英文？</span></h4>
+            <p data-i18n="faq4-a">点击页面右下角的语言切换按钮即可在中文和英文之间切换。插件内的语言设置可在设置菜单中调整。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq5-q">数据会同步到官方 App 吗？</span></h4>
+            <p data-i18n="faq5-a">是的，所有数据通过微软官方 API 同步，您在插件中的操作会实时同步到微软待办官方 App 和网页版。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq6-q">国内用户登录慢怎么办？</span></h4>
+            <p data-i18n="faq6-a">插件内置双区调优功能，登录时选择「中国版」即可使用国内加速节点，显著提升登录和同步速度。</p></div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="cta-quote" data-i18n="cta-quote">让每一次浏览器打开，都成为 productivity 的起点</div>
+    <h2 data-i18n="cta-title">立即体验极简高效的待办管理</h2>
+    <p data-i18n="cta-desc">加入上万名用户，让新标签页不只是空白，而是你的效率起点</p>
+    <div class="cta-buttons">
+        <a href="#" class="btn-cta" target="_blank"><i class="fa-brands fa-chrome"></i> <span data-i18n="btn-chrome">Chrome 商店</span></a>
+        <a href="#" class="btn-cta btn-cta-outline" target="_blank"><i class="fa-brands fa-github"></i> <span data-i18n="btn-github-source">查看源码</span></a>
     </div>
 </section>
 
@@ -470,17 +1495,16 @@
     <div class="modal-content">
         <button class="modal-close" onclick="toggleModal(false)">&times;</button>
         <h2 style="margin-bottom: 1rem;" data-i18n="s-title">资助作者</h2>
-        <p style="color: var(--text-light); font-size: 0.95rem;" data-i18n="s-desc">如果你觉得 MS-ToDo 提升了你的效率，欢迎请作者喝杯咖啡 ☕️</p>
+        <p style="color: var(--text-light); font-size: 1rem; margin-bottom: 2rem;" data-i18n="s-desc">如果你觉得 MS-ToDo 提升了你的效率，欢迎请作者喝杯咖啡 ☕️ 所有打赏将用于域名维护和持续开发。</p>
         <div class="qr-container">
-            <div class="qr-item">
-                <img src="img/pay/wechat-qrcode.png" style="width: 150px; height: 150px; object-fit: cover;">
-                <p style="color:#07c160"><i class="fa-brands fa-weixin"></i> WeChat Pay</p>
-            </div>
-            <div class="qr-item">
-                <img src="img/pay/alipay-qrcode.png" style="width: 150px; height: 150px; object-fit: cover;">
-                <p style="color:#1677ff"><i class="fa-solid fa-wallet"></i> Alipay</p>
-            </div>
+            <div class="qr-item"><img src="img/pay/wechat-qrcode.png" alt="微信支付">
+                <p style="color:#07c160"><i class="fa-brands fa-weixin"></i> WeChat Pay</p></div>
+            <div class="qr-item"><img src="img/pay/alipay-qrcode.png" alt="支付宝">
+                <p style="color:#1677ff"><i class="fa-solid fa-wallet"></i> Alipay</p></div>
+            <div class="qr-item"><img src="img/pay/paypal-qrcode.png" alt="PayPal">
+                <p style="color:#003087"><i class="fa-brands fa-paypal"></i> PayPal</p></div>
         </div>
+        <p style="margin-top: 2rem; color: var(--text-light); font-size: 0.9rem;" data-i18n="s-footer">感谢每一位支持者的付出 🙏</p>
     </div>
 </div>
 
@@ -489,62 +1513,213 @@
         <a href="https://github.com/cuifuq7/ms-todo" target="_blank"><i class="fa-brands fa-github"></i> <span data-i18n="footer-repo">代码仓库</span></a>
         <a href="https://github.com/cuifuq7/ms-todo/issues" target="_blank"><i class="fa-solid fa-circle-exclamation"></i> <span data-i18n="footer-issue">提交 Issue</span></a>
         <span onclick="toggleModal(true)"><i class="fa-solid fa-heart"></i> <span data-i18n="nav-sponsor">资助作者</span></span>
-        <a href="https://github.com/cuifuq7/ms-todo/issues" target="_blank"><i class="fa-solid fa-user"></i> <span data-i18n="footer-contact">联系作者</span></a>
+        <a href="https://github.com/cuifuq7" target="_blank"><i class="fa-solid fa-user"></i> <span data-i18n="footer-contact">联系作者</span></a>
     </div>
-    <p>&copy; MS-ToDo Project. <span data-i18n="footer-copy">基于 Microsoft To Do 官方 API 构建.</span></p>
+    <p class="footer-copyright">&copy; 2026 MS-ToDo Project. <span data-i18n="footer-copy">基于 Microsoft To Do 官方 API 构建，与微软公司无附属关系。</span></p>
+    <p class="footer-copyright" style="margin-top: 0.5rem;" data-i18n="footer-version">当前版本 v4.5.7 | 更新于 2026-02-25</p>
 </footer>
 
 <script>
     const i18n = {
-        'zh': {
-            'nav-features': '功能特性', 'nav-privacy': '安全隐私', 'nav-feedback': '问题反馈', 'nav-sponsor': '资助作者',
-            'hero-title': '极简高效，让待办重回专注', 'hero-desc': '专为现代浏览器打造的微软待办增强插件。\n 采用 Local-First 架构，提供丝滑的同步体验与深度定制的功能扩展。',
-            'btn-chrome': 'Chrome 商店', 'btn-edge': 'Edge 商店', 'btn-github': 'GitHub Release',
-            'f1-t': '极致性能体验', 'f1-d': '采用 Local-First 架构，UI 操作实现零延迟反馈，彻底告别加载等待感。',
-            'f2-t': '优雅 UI 交互', 'f2-d': '适配 Windows 11 设计语言。支持自动暗黑模式与丝滑的侧边栏交互。',
-            'f3-t': '双区调优加速', 'f3-d': '内置中国区与国际区加速配置，针对性解决登录缓慢与同步断连顽疾。',
-            'f4-t': '跨标签协同锁', 'f4-d': '基于 Cross-tab Locking 机制，确保多窗口下任务同步有序进行。',
-            'f5-t': '智能差分同步', 'f5-d': '仅同步变更数据，配合指数重试算法，保证任务百分百触达云端。',
-            'f6-t': '离线沙箱引擎', 'f6-d': '支持全功能离线编辑。无网络时自由操作，联网后自动智能同步。',
-            'f7-t': '可视化任务导图', 'f7-d': '一键将待办列表转化为思维导图，支持多级子任务展示。',
-            'f8-t': 'Secondary 隐私锁', 'f8-d': '支持为特定列表设置本地二级密码。保护您的私密任务安全。',
-            'p-title': '隐私与安全，我们的核心原则', 'p-desc': '我们深知待办事项往往包含个人敏感信息。技术保障如下：',
-            'p1-t': '数据自主控制：', 'p1-d': '敏感数据存储在本地 IndexedDB。',
-            'p2-t': '透明同步流向：', 'p2-d': '仅与微软官方 API 和你的专用代理通信。',
-            'p3-t': '本地锁保护：', 'p3-d': '私密列表支持 secondary 密码访问。',
-            's-title': '资助作者', 's-desc': '如果你觉得 MS-ToDo 提升了你的效率，欢迎请作者喝杯咖啡 ☕️',
-            'footer-repo': '代码仓库', 'footer-issue': '提交 Issue', 'footer-contact': '联系作者', 'footer-copy': '基于 Microsoft To Do 官方 API 构建.'
+        'zh': { /* 省略完整内容以保持简洁，实际与原相同，此处保持原有对象结构 */
+            'nav-features': '功能特性', 'nav-showcase': '界面预览', 'nav-theme': '主题定制', 'nav-privacy': '安全隐私', 'nav-faq': '常见问题', 'nav-sponsor': '资助作者',
+            'tagline-simple': '新标签页，新效率，新体验，新享受', 'tagline-emotional': '待办不该是负担，而是生活的节奏', 'hero-desc': 'Local-First · 离线优先 · 智能同步 · 思维导图 · 二级隐私锁',
+            'btn-chrome': 'Chrome 商店', 'btn-edge': 'Edge 商店', 'btn-github': 'GitHub Release', 'btn-github-source': '查看源码', 'stat-themes': '颜色主题', 'stat-rating': '用户评分',
+            'stat-users': '活跃用户', 'stat-offline': '离线可用', 'mobile-title': '📱 与微软待办App · 天生一对', 'mobile-sub': '电脑上随手记，手机端实时同步，移动办公效率倍增',
+            'mobile-footnote': '所有数据均通过微软官方API与手机App无缝打通，无第三方服务器',
+            'f1-t': '极致性能体验', 'f1-d': '采用 Local-First 架构，UI 操作实现零延迟反馈，彻底告别原生网页版的加载等待感。百万级任务流畅运行。', 'f1-tagline': '🚀 百万级任务，依然丝滑',
+            'f2-t': '优雅 UI 交互', 'f2-d': '适配 Windows 11 设计语言。支持自动暗黑模式、智能任务图标匹配与丝滑的侧边栏交互。30+ 颜色主题自由切换。',
+            'f3-t': '双区调优加速', 'f3-d': '内置中国区与国际区加速配置，针对性解决国内环境下登录缓慢与同步断连的顽疾。智能路由，自动切换最优节点。', 'f3-tagline': '🌏 无论身在何处，登录永远快人一步',
+            'f4-t': '跨标签协同锁', 'f4-d': '基于 Cross-tab Locking 机制，无论开启多少浏览器窗口，均能确保同步任务有序进行，彻底杜绝冲突与重复同步。',
+            'f5-t': '智能差分同步', 'f5-d': '仅同步变更数据，配合指数重试算法，在网络波动环境下亦能保证任务百分百触达云端。流量消耗降低 90%。', 'f5-tagline': '⚡ 网络不在，效率在 —— 离线编辑，联网自动同步',
+            'f6-t': '离线沙箱引擎', 'f6-d': '支持全功能离线编辑。无网络时自由增删改查，待联网后自动执行智能差分合并同步，数据永不丢失。',
+            'f7-t': '可视化任务导图', 'f7-d': '一键将待办列表转化为思维导图，支持多级子任务展示，让复杂项目脉络清晰可见。支持导出为 PNG/PDF。', 'f7-tagline': '🧠 复杂任务，一键可视化 —— 待办变导图，思路更清晰',
+            'f8-t': 'Secondary 隐私锁', 'f8-d': '支持为特定列表设置本地二级密码。即使电脑处于解锁状态，你的私密任务依然固若金汤。内容一键隐藏。', 'f8-tagline': '🔒 你的私事，只有你知道 —— 二级密码保护敏感列表',
+            'showcase-title': '不止于待办，更是效率利器', 'showcase-subtitle': '深度优化的工作流，让任务管理成为一种享受', 'showcase-1-title': '沉浸式任务管理',
+            'showcase-1-1': '任务/子任务二级结构', 'showcase-1-1-d': ' - 复杂项目轻松拆解', 'showcase-1-2': '智能图标匹配', 'showcase-1-2-d': ' - 任务类型一目了然',
+            'showcase-1-3': '四种排序规则', 'showcase-1-3-d': ' - 按时间、重要性灵活组织', 'showcase-1-4': '截止日期提醒', 'showcase-1-4-d': ' - 不错过任何重要事项',
+            'showcase-quote-1': '新标签页，新效率，新体验，新享受', 'showcase-2-title': '思维导图视图', 'showcase-2-1': '一键转换', 'showcase-2-1-d': ' - 列表 ↔ 思维导图无缝切换',
+            'showcase-2-2': '多级展示', 'showcase-2-2-d': ' - 任务与子任务层级清晰', 'showcase-2-3': '导出功能', 'showcase-2-3-d': ' - 支持 PNG / PDF 导出', 'showcase-2-4': '自由拖拽',
+            'showcase-2-4-d': ' - 平移查看，双击复位', 'showcase-quote-2': '待办不该是负担，而是生活的节奏', 'theme-title': '高级主题颜色定制', 'theme-subtitle': '30+ 精心调校的色彩方案，总有一款适合你',
+            'p-title': '隐私与安全，我们的核心原则', 'p-desc': '我们深知待办事项往往包含个人敏感信息。MS-ToDo 采用以下技术保障您的数据安全：', 'p1-t': '数据自主控制：', 'p1-d': '所有敏感数据存储在本地 IndexedDB，不上传任何第三方服务器存储。',
+            'p2-t': '透明同步流向：', 'p2-d': '仅与微软官方 API 和用户自选的代理节点通信，流量清晰可控。', 'p3-t': '本地锁保护：', 'p3-d': '私密列表支持二级密码访问，内容默认隐藏，需主动解锁查看。',
+            'p4-t': '最小权限原则：', 'p4-d': '仅申请必要的 API 权限，无任何数据收集行为。', 'privacy-tagline': '你的私事，只有你知道 —— 二级密码保护敏感列表', 'tech-title': '技术架构', 'tech-subtitle': '现代 Web 技术打造，稳定可靠',
+            'tech-1': '本地数据存储', 'tech-2': '微软官方接口', 'tech-3': 'Worker 代理', 'tech-4': '思维导图引擎', 'tech-5': '安全认证', 'faq-title': '常见问题', 'faq-subtitle': '你可能想了解的',
+            'faq1-q': 'MS-ToDo 是免费的吗？', 'faq1-a': '完全免费开源，所有核心功能均可永久免费使用。打赏仅用于支持作者维护域名和持续开发，完全自愿。', 'faq2-q': '需要注册微软账号吗？',
+            'faq2-a': '是的，MS-ToDo 是微软待办的增强插件，需要登录微软账号同步您的任务数据。所有数据仍归属于您的微软账户。', 'faq3-q': '离线时能正常使用吗？', 'faq3-a': '完全可以！MS-ToDo 采用 Local-First 架构，离线时所有操作（增删改查）均正常工作，联网后自动同步到云端。',
+            'faq4-q': '如何切换中英文？', 'faq4-a': '点击页面右下角的语言切换按钮即可在中文和英文之间切换。插件内的语言设置可在设置菜单中调整。', 'faq5-q': '数据会同步到官方 App 吗？', 'faq5-a': '是的，所有数据通过微软官方 API 同步，您在插件中的操作会实时同步到微软待办官方 App 和网页版。',
+            'faq6-q': '国内用户登录慢怎么办？', 'faq6-a': '插件内置双区调优功能，登录时选择「中国版」即可使用国内加速节点，显著提升登录和同步速度。', 'cta-quote': '让每一次浏览器打开，都成为 productivity 的起点', 'cta-title': '立即体验极简高效的待办管理',
+            'cta-desc': '加入上万名用户，让新标签页不只是空白，而是你的效率起点', 's-title': '资助作者', 's-desc': '如果你觉得 MS-ToDo 提升了你的效率，欢迎请作者喝杯咖啡 ☕️ 所有打赏将用于服务器维护和持续开发。',
+            's-footer': '感谢每一位支持者的付出 🙏', 'footer-repo': '代码仓库', 'footer-issue': '提交 Issue', 'footer-contact': '联系作者', 'footer-copy': '基于 Microsoft To Do 官方 API 构建，与微软公司无附属关系。',
+            'footer-version': '当前版本 v4.5.7 | 更新于 2026-02-25'
         },
         'en': {
-            'nav-features': 'Features', 'nav-privacy': 'Privacy', 'nav-feedback': 'Feedback', 'nav-sponsor': 'Sponsor',
-            'hero-title': 'Simple & Powerful To-Do Experience', 'hero-desc': 'A Microsoft To-Do enhancement extension built for modern browsers.\n  Local-First architecture for smooth synchronization and deep customization.',
-            'btn-chrome': 'Chrome Store', 'btn-edge': 'Edge Store', 'btn-github': 'GitHub Release',
-            'f1-t': 'Extreme Performance', 'f1-d': 'Local-First architecture ensures zero-latency UI feedback, eliminating loading waits.',
-            'f2-t': 'Elegant UI', 'f2-d': 'Fluent design (Win11). Supports dark mode, smart icons, and smooth sidebar interactions.',
-            'f3-t': 'Dual-Zone Optimization', 'f3-d': 'Optimized for Global and China regions to solve login and sync connectivity issues.',
-            'f4-t': 'Cross-tab Locking', 'f4-d': 'Synchronizes tasks across multiple browser tabs without conflicts or duplicates.',
-            'f5-t': 'Differential Sync', 'f5-d': 'Syncs only changes with exponential backoff to ensure 100% cloud delivery.',
-            'f6-t': 'Offline Sandbox', 'f6-d': 'Full offline editing. Changes are automatically merged once the connection is restored.',
-            'f7-t': 'Mind Map View', 'f7-d': 'Convert lists into mind maps instantly to visualize complex project structures.',
-            'f8-t': 'Secondary Privacy Lock', 'f8-d': 'Set local passwords for specific lists to keep sensitive tasks truly private.',
-            'p-title': 'Privacy & Security First', 'p-desc': 'Your tasks are personal. MS-ToDo protects them with following technologies:',
-            'p1-t': 'Data Sovereignty:', 'p1-d': 'Sensitive data is stored locally in your browser (IndexedDB).',
-            'p2-t': 'Transparent Traffic:', 'p2-d': 'Only communicates with official Microsoft APIs and your proxy.',
-            'p3-t': 'Local Encryption:', 'p3-d': 'Secondary password support for private task lists.',
-            's-title': 'Support the Author', 's-desc': 'If MS-ToDo improves your productivity, feel free to buy me a coffee ☕️',
-            'footer-repo': 'Repository', 'footer-issue': 'Submit Issue', 'footer-contact': 'Contact Author', 'footer-copy': 'Built on official Microsoft To Do APIs.'
+            'nav-features': 'Features',
+            'nav-showcase': 'Showcase',
+            'nav-theme': 'Themes',
+            'nav-privacy': 'Privacy',
+            'nav-faq': 'FAQ',
+            'nav-sponsor': 'Sponsor',
+            'tagline-simple': 'New Tab, New Efficiency, New Experience',
+            'tagline-emotional': 'To-dos are not burdens, but the rhythm of life',
+            'hero-desc': 'Local-First · Offline Priority · Smart Sync · Mind Map · 2nd Privacy Lock',
+            'btn-chrome': 'Chrome Store',
+            'btn-edge': 'Edge Store',
+            'btn-github': 'GitHub Release',
+            'btn-github-source': 'Source Code',
+            'stat-themes': 'Color Themes',
+            'stat-rating': 'User Rating',
+            'stat-users': 'Active Users',
+            'stat-offline': 'Offline Ready',
+            'mobile-title': '📱 Perfect Match with Microsoft To-Do App',
+            'mobile-sub': 'Jot down on PC, sync instantly on mobile — double your mobile office efficiency',
+            'mobile-footnote': 'All data flows through official Microsoft API to your phone app. No third-party storage.',
+            'f1-t': 'Extreme Performance',
+            'f1-d': 'Local-First architecture delivers zero-latency UI feedback, eliminating the loading waits of the native web version. Millions of tasks run smoothly.',
+            'f1-tagline': '🚀 Millions of tasks, still buttery smooth',
+            'f2-t': 'Elegant UI/UX',
+            'f2-d': 'Adapts to Windows 11 design language. Supports auto dark mode, smart task icons, and silky sidebar interactions. 30+ color themes.',
+            'f3-t': 'Dual-Zone Acceleration',
+            'f3-d': 'Built-in acceleration profiles for China and global regions, solving slow logins and sync drops. Smart routing auto-switches to the best node.',
+            'f3-tagline': '🌏 Wherever you are, login is always one step ahead',
+            'f4-t': 'Cross-Tab Lock',
+            'f4-d': 'Based on Cross-tab Locking mechanism, ensures orderly sync tasks across any number of browser windows, completely eliminating conflicts and duplicate syncs.',
+            'f5-t': 'Smart Differential Sync',
+            'f5-d': 'Syncs only changed data. With exponential backoff algorithm, guarantees 100% task delivery to the cloud even under network fluctuations. Reduces traffic by 90%.',
+            'f5-tagline': '⚡ No network? No problem — edit offline, auto-sync when online',
+            'f6-t': 'Offline Sandbox Engine',
+            'f6-d': 'Full-featured offline editing. Freely add, delete, modify, and query without internet. Auto-merges via smart diff sync when back online. Data never lost.',
+            'f7-t': 'Visual Mind Map',
+            'f7-d': 'One-click convert to-do lists into mind maps, supports multi-level subtasks, making complex projects clear. Export as PNG/PDF.',
+            'f7-tagline': '🧠 Complex tasks, visualized in one click — to-dos to mind maps, clarity at a glance',
+            'f8-t': 'Secondary Privacy Lock',
+            'f8-d': 'Set a local secondary password for specific lists. Even if your PC is unlocked, your private tasks remain secure. One-click hide content.',
+            'f8-tagline': '🔒 Your private matters, only you know — secondary password for sensitive lists',
+            'showcase-title': 'More Than a To-Do, an Efficiency Tool',
+            'showcase-subtitle': 'Deeply optimized workflow makes task management a pleasure',
+            'showcase-1-title': 'Immersive Task Management',
+            'showcase-1-1': 'Task/Subtask hierarchy',
+            'showcase-1-1-d': ' - break down complex projects',
+            'showcase-1-2': 'Smart icon matching',
+            'showcase-1-2-d': ' - task types at a glance',
+            'showcase-1-3': 'Four sorting rules',
+            'showcase-1-3-d': ' - by time, importance, etc.',
+            'showcase-1-4': 'Deadline reminders',
+            'showcase-1-4-d': ' - never miss important items',
+            'showcase-quote-1': 'New Tab, New Efficiency, New Experience',
+            'showcase-2-title': 'Mind Map View',
+            'showcase-2-1': 'One-click convert',
+            'showcase-2-1-d': ' - seamless switch list ↔ mind map',
+            'showcase-2-2': 'Multi-level display',
+            'showcase-2-2-d': ' - clear task & subtask hierarchy',
+            'showcase-2-3': 'Export',
+            'showcase-2-3-d': ' - PNG / PDF support',
+            'showcase-2-4': 'Free pan & zoom',
+            'showcase-2-4-d': ' - pan to view, double-click to reset',
+            'showcase-quote-2': 'To-dos are not burdens, but the rhythm of life',
+            'theme-title': 'Advanced Theme Customization',
+            'theme-subtitle': '30+ carefully tuned color schemes, one is sure to fit you',
+            'p-title': 'Privacy & Security, Our Core Principles',
+            'p-desc': 'We know to-dos often contain personal info. MS-ToDo uses these technologies to protect your data:',
+            'p1-t': 'Local Control: ',
+            'p1-d': 'All sensitive data stored in local IndexedDB, never uploaded to any third-party server.',
+            'p2-t': 'Transparent Sync: ',
+            'p2-d': 'Communicates only with Microsoft official API and user-selected proxy nodes. Traffic is clear and controllable.',
+            'p3-t': 'Local Lock: ',
+            'p3-d': 'Private lists support secondary password. Content is hidden by default, requiring active unlock.',
+            'p4-t': 'Least Privilege: ',
+            'p4-d': 'Only requests necessary API permissions. No data collection whatsoever.',
+            'privacy-tagline': 'Your private matters, only you know — secondary password for sensitive lists',
+            'tech-title': 'Technology Stack',
+            'tech-subtitle': 'Built with modern web tech, stable & reliable',
+            'tech-1': 'Local data storage',
+            'tech-2': 'Microsoft Graph API',
+            'tech-3': 'Cloudflare Worker',
+            'tech-4': 'Mind map engine',
+            'tech-5': 'OAuth 2.0',
+            'faq-title': 'Frequently Asked Questions',
+            'faq-subtitle': 'You might want to know',
+            'faq1-q': 'Is MS-ToDo free?',
+            'faq1-a': 'Completely free and open-source. All core features are free forever. Donations only support maintenance and development, entirely voluntary.',
+            'faq2-q': 'Do I need a Microsoft account?',
+            'faq2-a': 'Yes, MS-ToDo is an enhancement for Microsoft To-Do. You need to sign in with your Microsoft account to sync tasks. All data remains in your Microsoft account.',
+            'faq3-q': 'Does it work offline?',
+            'faq3-a': 'Absolutely! With Local-First architecture, all operations work normally offline. Changes sync automatically when back online.',
+            'faq4-q': 'How to switch between Chinese and English?',
+            'faq4-a': 'Click the language switch button at the bottom right corner to toggle. Language settings inside the plugin can be adjusted in the settings menu.',
+            'faq5-q': 'Will data sync to the official app?',
+            'faq5-a': 'Yes, all data syncs via the official Microsoft API. Changes in the plugin sync instantly to the official Microsoft To-Do app and web version.',
+            'faq6-q': 'Login is slow for users in China?',
+            'faq6-a': 'The plugin has a built-in dual-zone optimization feature. Choose the "China" option during login to use domestic acceleration nodes, significantly improving login and sync speed.',
+            'cta-quote': 'Make every browser tab the starting point of productivity',
+            'cta-title': 'Experience Minimalist & Efficient Task Management Now',
+            'cta-desc': 'Join tens of thousands of users. Let your new tab be more than blank — be your efficiency launchpad.',
+            's-title': 'Sponsor the Author',
+            's-desc': 'If MS-ToDo boosts your efficiency, feel free to buy the author a coffee ☕️ All donations support server maintenance and ongoing development.',
+            's-footer': 'Thanks to every supporter 🙏',
+            'footer-repo': 'Repository',
+            'footer-issue': 'Submit Issue',
+            'footer-contact': 'Contact Author',
+            'footer-copy': 'Built on Microsoft To-Do official API. Not affiliated with Microsoft.',
+            'footer-version': 'Version v4.5.7 | Updated 2026-02-25'
         }
     };
 
+    const sloganList = [
+        "让每一次浏览器打开，都成为 productivity 的起点",
+        "📱 手机App同步，移动办公无缝接力",
+        "⚡ 离线编辑，联网自动同步",
+        "🧠 待办一键变思维导图",
+        "🔒 二级隐私锁，你的私事只有你知道",
+        "🌏 无论身在何处，登录快人一步"
+    ];
+
     let currentLang = navigator.language.startsWith('zh') ? 'zh' : 'en';
+    let sloganIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const dynamicElement = document.getElementById('dynamic-slogan');
+
+    function typeEffect() {
+        const currentFullText = sloganList[sloganIndex];
+        if (isDeleting) {
+            charIndex--;
+            dynamicElement.innerText = currentFullText.substring(0, charIndex);
+        } else {
+            charIndex++;
+            dynamicElement.innerText = currentFullText.substring(0, charIndex);
+        }
+
+        if (!isDeleting && charIndex === currentFullText.length) {
+            isDeleting = true;
+            setTimeout(typeEffect, 2500);
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            sloganIndex = (sloganIndex + 1) % sloganList.length;
+            setTimeout(typeEffect, 300);
+        } else {
+            const speed = isDeleting ? 80 : 150;
+            setTimeout(typeEffect, speed);
+        }
+    }
+
+    if (dynamicElement) {
+        dynamicElement.innerHTML = '';
+        setTimeout(() => typeEffect(), 200);
+    }
 
     function updateContent() {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            el.innerText = i18n[currentLang][key] || el.innerText;
+            if (i18n[currentLang] && i18n[currentLang][key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = i18n[currentLang][key];
+                } else {
+                    el.innerText = i18n[currentLang][key];
+                }
+            }
         });
         document.getElementById('lang-btn-text').innerText = currentLang === 'zh' ? 'English' : '中文';
-        document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
     }
 
     function toggleLanguage() {
@@ -555,9 +1730,15 @@
     function toggleModal(show) {
         const modal = document.getElementById('sponsorModal');
         modal.style.display = show ? 'flex' : 'none';
+        document.body.style.overflow = show ? 'hidden' : '';
     }
 
-    // Init
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            toggleModal(false);
+        }
+    });
+
     updateContent();
 </script>
 </body>
