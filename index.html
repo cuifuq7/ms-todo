@@ -71,6 +71,15 @@
             gap: 12px;
         }
 
+        /* 添加超链接样式——覆盖整个logo区域 */
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit; /* 继承父级颜色 */
+        }
+
         .logo img {
             width: 32px;
             height: 32px;
@@ -1170,9 +1179,12 @@
 </div>
 
 <nav>
+    <!-- ========== 关键修改：为整个logo添加指向网站根目录的超链接 ========== -->
     <div class="logo">
-        <img src="img/logo/logo.png" alt="MS-ToDo Logo">
-        MS-ToDo
+        <a href="/" title="返回首页 MS-ToDo 超级增强版">
+            <img src="img/logo/logo.png" alt="MS-ToDo Logo">
+            MS-ToDo
+        </a>
     </div>
     <div class="nav-links">
         <a href="#features" data-i18n="nav-features"><i class="fa-solid fa-star"></i> 功能特性</a>
@@ -1204,9 +1216,9 @@
         <a href="https://microsoftedge.microsoft.com/addons/detail/mstodo/aoodkfaickihogbaooannechhccggnbp" class="btn-download btn-edge" target="_blank">
             <i class="fa-brands fa-edge"></i> <span data-i18n="btn-edge">Edge 商店</span>
         </a>
-<!--        <a href="#" class="btn-download btn-github" target="_blank">-->
-<!--            <i class="fa-brands fa-github"></i> <span data-i18n="btn-github">GitHub Release</span>-->
-<!--        </a>-->
+        <!--        <a href="#" class="btn-download btn-github" target="_blank">-->
+        <!--            <i class="fa-brands fa-github"></i> <span data-i18n="btn-github">GitHub Release</span>-->
+        <!--        </a>-->
     </div>
 
     <div class="stats-bar">
@@ -1233,21 +1245,21 @@
 <section class="slogan-waterfall">
     <div class="waterfall-track">
         <!-- 第一组标语 (5个核心卖点，包含您提供的5个icon句) -->
+        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span>节日不孤单，让烟花点亮你的待办心情</span></div>
         <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span>无论身在何处，登录永远快人一步</span></div>
         <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span>百万级任务，依然丝滑</span></div>
         <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span>离线编辑，联网自动同步</span></div>
-        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>
         <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span>二级密码保护敏感列表</span></div>
         <!-- 再加一条强调手机同步，增加丰富度 (可选) -->
         <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span> 手机App无缝同步</span></div>
 
         <!-- 第二组复制一份，以实现无限滚动错觉（内容完全一样，保证动画连续） -->
-        <div class="waterfall-item"><i class="fa-solid fa-globe"></i> <span>节日不孤单，让烟花点亮你的待办心情</span></div>
-<!--        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span>百万级任务，依然丝滑</span></div>-->
-<!--        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span>离线编辑，联网自动同步</span></div>-->
-<!--        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>-->
-<!--        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span>二级密码保护敏感列表</span></div>-->
-<!--        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span>手机App无缝同步</span></div>-->
+        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>
+        <div class="waterfall-item"><i class="fa-solid fa-rocket"></i> <span>百万级任务，依然丝滑</span></div>
+        <!--        <div class="waterfall-item"><i class="fa-solid fa-cloud-bolt"></i> <span>离线编辑，联网自动同步</span></div>-->
+        <!--        <div class="waterfall-item"><i class="fa-solid fa-brain"></i> <span>待办变导图，思路更清晰</span></div>-->
+        <!--        <div class="waterfall-item"><i class="fa-solid fa-lock"></i> <span>二级密码保护敏感列表</span></div>-->
+        <!--        <div class="waterfall-item"><i class="fa-solid fa-mobile-screen-button"></i> <span>手机App无缝同步</span></div>-->
     </div>
 </section>
 
