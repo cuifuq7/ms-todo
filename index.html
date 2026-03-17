@@ -1667,7 +1667,7 @@
 
     const sloganList = [
         "让每一次浏览器打开，都成为 productivity 的起点",
-        "📱 手机App同步，移动办公无缝接力",
+        "📱手机App同步，移动办公无缝接力",
         "⚡ 离线编辑，联网自动同步",
         "🧠 待办一键变思维导图",
         "🔒 二级隐私锁，你的私事只有你知道",
@@ -1692,11 +1692,11 @@
 
         if (!isDeleting && charIndex === currentFullText.length) {
             isDeleting = true;
-            setTimeout(typeEffect, 2500);
+            setTimeout(typeEffect, 3500);
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             sloganIndex = (sloganIndex + 1) % sloganList.length;
-            setTimeout(typeEffect, 300);
+            setTimeout(typeEffect, 500);
         } else {
             const speed = isDeleting ? 80 : 150;
             setTimeout(typeEffect, speed);
