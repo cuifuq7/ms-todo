@@ -14,6 +14,7 @@
     <link rel="icon" type="image/png" href="img/logo/logo.png">
     <link rel="stylesheet" href="css/awesome-6.7.2.css">
     <style>
+        /* 完整样式 - 包含所有原有样式 + 轮播样式 */
         * {
             margin: 0;
             padding: 0;
@@ -555,37 +556,14 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .theme-blue {
-            background: #2563eb;
-        }
-
-        .theme-purple {
-            background: #7c3aed;
-        }
-
-        .theme-green {
-            background: #10b981;
-        }
-
-        .theme-rose {
-            background: #e11d48;
-        }
-
-        .theme-orange {
-            background: #f97316;
-        }
-
-        .theme-teal {
-            background: #14b8a6;
-        }
-
-        .theme-indigo {
-            background: #4f46e5;
-        }
-
-        .theme-gray {
-            background: #4b5563;
-        }
+        .theme-blue { background: #2563eb; }
+        .theme-purple { background: #7c3aed; }
+        .theme-green { background: #10b981; }
+        .theme-rose { background: #e11d48; }
+        .theme-orange { background: #f97316; }
+        .theme-teal { background: #14b8a6; }
+        .theme-indigo { background: #4f46e5; }
+        .theme-gray { background: #4b5563; }
 
         .mobile-showcase {
             padding: 5rem 10%;
@@ -861,6 +839,7 @@
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
+            position: relative;
         }
 
         .modal-close {
@@ -871,6 +850,43 @@
             cursor: pointer;
             background: none;
             border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--gray-100);
+        }
+
+        .privacy-policy-content {
+            margin-top: 1.5rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .privacy-policy-content h3 {
+            margin: 1.8rem 0 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .privacy-policy-content h3:first-of-type {
+            margin-top: 0;
+        }
+
+        .privacy-policy-content p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .privacy-policy-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
         }
 
         .qr-container {
@@ -910,46 +926,28 @@
             text-decoration: none;
             color: var(--text-light);
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover, .footer-links span:hover {
+            color: var(--primary-color);
         }
 
         @media (max-width: 1200px) {
-            .features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .tech-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .theme-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .features { grid-template-columns: repeat(2, 1fr); }
+            .tech-grid { grid-template-columns: repeat(3, 1fr); }
+            .theme-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 992px) {
-            .showcase-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .faq-grid {
-                grid-template-columns: 1fr;
-            }
+            .showcase-grid { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            #dynamic-slogan {
-                font-size: 2.2rem;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            .carousel-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 1.2rem;
-            }
+            #dynamic-slogan { font-size: 2.2rem; }
+            .features { grid-template-columns: 1fr; }
+            .carousel-btn { width: 36px; height: 36px; font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -968,8 +966,8 @@
         <a href="#privacy" data-i18n="nav-privacy"><i class="fa-solid fa-shield"></i> 安全隐私</a>
         <a href="#faq" data-i18n="nav-faq"><i class="fa-solid fa-circle-question"></i> FAQ</a>
         <span onclick="togglePrivacyModal(true)"><i class="fa-solid fa-lock"></i> <span data-i18n="nav-privacypolicy">隐私政策</span></span>
-        <span class="btn-sponsor-nav" onclick="toggleSponsorModal(true)" data-i18n="nav-sponsor"><i class="fa-solid fa-heart"></i> 资助作者</span>
-        <a href="https://github.com/cuifuq7/ms-todo" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+<!--        <span class="btn-sponsor-nav" onclick="toggleSponsorModal(true)" data-i18n="nav-sponsor"><i class="fa-solid fa-heart"></i> 资助作者</span>-->
+<!--        <a href="https://github.com/cuifuq7/ms-todo" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>-->
         <div class="nav-lang" onclick="toggleLanguage()">
             <i class="fa-solid fa-globe"></i>
             <span id="lang-btn-text">English</span>
@@ -994,22 +992,10 @@
         </a>
     </div>
     <div class="stats-bar">
-        <div class="stat-item">
-            <div class="stat-number">25+</div>
-            <div class="stat-label" data-i18n="stat-themes">颜色主题</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">4.8★</div>
-            <div class="stat-label" data-i18n="stat-rating">用户评分</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">50+</div>
-            <div class="stat-label" data-i18n="stat-users">活跃用户</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">100%</div>
-            <div class="stat-label" data-i18n="stat-offline">离线可用</div>
-        </div>
+        <div class="stat-item"><div class="stat-number">25+</div><div class="stat-label" data-i18n="stat-themes">颜色主题</div></div>
+        <div class="stat-item"><div class="stat-number">4.8★</div><div class="stat-label" data-i18n="stat-rating">用户评分</div></div>
+        <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label" data-i18n="stat-users">活跃用户</div></div>
+        <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label" data-i18n="stat-offline">离线可用</div></div>
     </div>
 </section>
 
@@ -1031,46 +1017,14 @@
 </section>
 
 <section class="features" id="features">
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div>
-        <h3 data-i18n="f1-t">极致性能体验</h3>
-        <p data-i18n="f1-d">采用 Local-First 架构，UI 操作实现零延迟反馈，彻底告别原生网页版的加载等待感。百万级任务流畅运行。</p>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <h3 data-i18n="f2-t">优雅 UI 交互</h3>
-        <p data-i18n="f2-d">适配 Windows 11 设计语言。支持自动暗黑模式、智能任务图标匹配与丝滑的侧边栏交互。30+ 颜色主题自由切换。</p>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
-        <h3 data-i18n="f3-t">双区调优加速</h3>
-        <p data-i18n="f3-d">内置中国区与国际区加速配置，针对性解决国内环境下登录缓慢与同步断连的顽疾。智能路由，自动切换最优节点。</p>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-clone"></i></div>
-        <h3 data-i18n="f4-t">跨标签协同锁</h3>
-        <p data-i18n="f4-d">基于 Cross-tab Locking 机制，无论开启多少浏览器窗口，均能确保同步任务有序进行，彻底杜绝冲突与重复同步。</p>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-        <h3 data-i18n="f5-t">智能差分同步</h3>
-        <p data-i18n="f5-d">仅同步变更数据，配合指数重试算法，在网络波动环境下亦能保证任务百分百触达云端。流量消耗降低 90%。</p>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-box-archive"></i></div>
-        <h3 data-i18n="f6-t">离线沙箱引擎</h3>
-        <p data-i18n="f6-d">支持全功能离线编辑。无网络时自由增删改查，待联网后自动执行智能差分合并同步，数据永不丢失。</p>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-sitemap"></i></div>
-        <h3 data-i18n="f7-t">可视化任务导图</h3>
-        <p data-i18n="f7-d">一键将待办列表转化为思维导图，支持多级子任务展示，让复杂项目脉络清晰可见。支持导出为 PNG/PDF。</p>
-    </div>
-    <div class="feature-card">
-        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3 data-i18n="f8-t">Secondary 隐私锁</h3>
-        <p data-i18n="f8-d">支持为特定列表设置本地二级密码。即使电脑处于解锁状态，你的私密任务依然固若金汤。内容一键隐藏。</p>
-    </div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div><h3 data-i18n="f1-t">极致性能体验</h3><p data-i18n="f1-d">采用 Local-First 架构，UI 操作实现零延迟反馈，彻底告别原生网页版的加载等待感。百万级任务流畅运行。</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3 data-i18n="f2-t">优雅 UI 交互</h3><p data-i18n="f2-d">适配 Windows 11 设计语言。支持自动暗黑模式、智能任务图标匹配与丝滑的侧边栏交互。30+ 颜色主题自由切换。</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-bolt-lightning"></i></div><h3 data-i18n="f3-t">双区调优加速</h3><p data-i18n="f3-d">内置中国区与国际区加速配置，针对性解决国内环境下登录缓慢与同步断连的顽疾。智能路由，自动切换最优节点。</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-clone"></i></div><h3 data-i18n="f4-t">跨标签协同锁</h3><p data-i18n="f4-d">基于 Cross-tab Locking 机制，无论开启多少浏览器窗口，均能确保同步任务有序进行，彻底杜绝冲突与重复同步。</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><h3 data-i18n="f5-t">智能差分同步</h3><p data-i18n="f5-d">仅同步变更数据，配合指数重试算法，在网络波动环境下亦能保证任务百分百触达云端。流量消耗降低 90%。</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-box-archive"></i></div><h3 data-i18n="f6-t">离线沙箱引擎</h3><p data-i18n="f6-d">支持全功能离线编辑。无网络时自由增删改查，待联网后自动执行智能差分合并同步，数据永不丢失。</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-sitemap"></i></div><h3 data-i18n="f7-t">可视化任务导图</h3><p data-i18n="f7-d">一键将待办列表转化为思维导图，支持多级子任务展示，让复杂项目脉络清晰可见。支持导出为 PNG/PDF。</p></div>
+    <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div><h3 data-i18n="f8-t">Secondary 隐私锁</h3><p data-i18n="f8-d">支持为特定列表设置本地二级密码。即使电脑处于解锁状态，你的私密任务依然固若金汤。内容一键隐藏。</p></div>
 </section>
 
 <section class="showcase" id="showcase">
@@ -1079,9 +1033,9 @@
     <div class="showcase-grid">
         <div class="carousel-container" id="carousel1">
             <div class="carousel-slides" id="slides1">
-                <div class="carousel-slide"><img src="img/page/family-pc.png" alt="MS-ToDo 主界面" style="max-height: 370px;"></div>
-                <div class="carousel-slide"><img src="img/page/Universities-list-zh.png" alt="MS-ToDo 待办列表中文" style="max-height: 370px;"></div>
-                <div class="carousel-slide"><img src="img/page/Universities-list-en.png" alt="MS-ToDo 待办列表英文" style="max-height: 370px;"></div>
+                <div class="carousel-slide"><img src="img/page/family-pc.png" alt="MS-ToDo 主界面"></div>
+                <div class="carousel-slide"><img src="img/page/Universities-list-zh.png" alt="MS-ToDo 待办列表中文"></div>
+                <div class="carousel-slide"><img src="img/page/Universities-list-en.png" alt="MS-ToDo 待办列表英文"></div>
             </div>
             <button class="carousel-btn btn-prev" onclick="prevSlide('carousel1')">‹</button>
             <button class="carousel-btn btn-next" onclick="nextSlide('carousel1')">›</button>
@@ -1090,18 +1044,10 @@
         <div class="showcase-content">
             <h3 data-i18n="showcase-1-title">沉浸式任务管理</h3>
             <ul class="showcase-list">
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-1-1">任务/子任务二级结构</strong><span data-i18n="showcase-1-1-d"> - 复杂项目轻松拆解</span></div>
-                </li>
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-1-2">智能图标匹配</strong><span data-i18n="showcase-1-2-d"> - 任务类型一目了然</span></div>
-                </li>
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-1-3">四种排序规则</strong><span data-i18n="showcase-1-3-d"> - 按时间、重要性灵活组织</span></div>
-                </li>
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-1-4">截止日期提醒</strong><span data-i18n="showcase-1-4-d"> - 不错过任何重要事项</span></div>
-                </li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-1-1">任务/子任务二级结构</strong><span data-i18n="showcase-1-1-d"> - 复杂项目轻松拆解</span></div></li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-1-2">智能图标匹配</strong><span data-i18n="showcase-1-2-d"> - 任务类型一目了然</span></div></li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-1-3">四种排序规则</strong><span data-i18n="showcase-1-3-d"> - 按时间、重要性灵活组织</span></div></li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-1-4">截止日期提醒</strong><span data-i18n="showcase-1-4-d"> - 不错过任何重要事项</span></div></li>
             </ul>
             <div class="showcase-quote"><i class="fa-regular fa-star"></i> <span data-i18n="showcase-quote-1">新标签页，新效率，新体验，新享受</span></div>
         </div>
@@ -1110,26 +1056,18 @@
         <div class="showcase-content">
             <h3 data-i18n="showcase-2-title">思维导图视图</h3>
             <ul class="showcase-list">
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-2-1">一键转换</strong><span data-i18n="showcase-2-1-d"> - 列表 ↔ 思维导图无缝切换</span></div>
-                </li>
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-2-2">多级展示</strong><span data-i18n="showcase-2-2-d"> - 任务与子任务层级清晰</span></div>
-                </li>
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-2-3">导出功能</strong><span data-i18n="showcase-2-3-d"> - 支持 PNG / PDF 导出</span></div>
-                </li>
-                <li><i class="fa-regular fa-circle-check"></i>
-                    <div><strong data-i18n="showcase-2-4">自由拖拽</strong><span data-i18n="showcase-2-4-d"> - 平移查看，双击复位</span></div>
-                </li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-2-1">一键转换</strong><span data-i18n="showcase-2-1-d"> - 列表 ↔ 思维导图无缝切换</span></div></li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-2-2">多级展示</strong><span data-i18n="showcase-2-2-d"> - 任务与子任务层级清晰</span></div></li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-2-3">导出功能</strong><span data-i18n="showcase-2-3-d"> - 支持 PNG / PDF 导出</span></div></li>
+                <li><i class="fa-regular fa-circle-check"></i><div><strong data-i18n="showcase-2-4">自由拖拽</strong><span data-i18n="showcase-2-4-d"> - 平移查看，双击复位</span></div></li>
             </ul>
             <div class="showcase-quote"><i class="fa-regular fa-lightbulb"></i> <span data-i18n="showcase-quote-2">待办不该是负担，而是生活的节奏</span></div>
         </div>
         <div class="carousel-container" id="carousel2">
             <div class="carousel-slides" id="slides2">
-                <div class="carousel-slide"><img src="img/page/Universities-mind-en.png" alt="MS-ToDo维导图英文" style="max-height: 500px;"></div>
-                <div class="carousel-slide"><img src="img/page/Universities-mind-zh.png" alt="MS-ToDo 思维导图中文" style="max-height: 500px;"></div>
-                <div class="carousel-slide"><img src="img/page/family-pc-mind.png" alt="MS-ToDo 思维导图总览" style="max-height: 500px;"></div>
+                <div class="carousel-slide"><img src="img/page/Universities-mind-en.png" alt="MS-ToDo 思维导图英文"></div>
+                <div class="carousel-slide"><img src="img/page/Universities-mind-zh.png" alt="MS-ToDo 思维导图中文"></div>
+                <div class="carousel-slide"><img src="img/page/family-pc-mind.png" alt="MS-ToDo 思维导图总览"></div>
             </div>
             <button class="carousel-btn btn-prev" onclick="prevSlide('carousel2')">‹</button>
             <button class="carousel-btn btn-next" onclick="nextSlide('carousel2')">›</button>
@@ -1142,38 +1080,14 @@
     <h2 class="section-title" data-i18n="theme-title">高级主题颜色定制</h2>
     <p class="section-subtitle" data-i18n="theme-subtitle">30+ 精心调校的色彩方案，总有一款适合你</p>
     <div class="theme-grid">
-        <div class="theme-item">
-            <div class="theme-color theme-blue"></div>
-            <h4 data-i18n="theme-blue-title">经典蓝</h4>
-            <p data-i18n="theme-blue-desc">沉稳专注</p></div>
-        <div class="theme-item">
-            <div class="theme-color theme-purple"></div>
-            <h4 data-i18n="theme-purple-title">优雅紫</h4>
-            <p data-i18n="theme-purple-desc">创意灵感</p></div>
-        <div class="theme-item">
-            <div class="theme-color theme-green"></div>
-            <h4 data-i18n="theme-green-title">森林绿</h4>
-            <p data-i18n="theme-green-desc">清新自然</p></div>
-        <div class="theme-item">
-            <div class="theme-color theme-rose"></div>
-            <h4 data-i18n="theme-rose-title">玫瑰红</h4>
-            <p data-i18n="theme-rose-desc">热情活力</p></div>
-        <div class="theme-item">
-            <div class="theme-color theme-orange"></div>
-            <h4 data-i18n="theme-orange-title">暖阳橙</h4>
-            <p data-i18n="theme-orange-desc">温暖积极</p></div>
-        <div class="theme-item">
-            <div class="theme-color theme-teal"></div>
-            <h4 data-i18n="theme-teal-title">薄荷绿</h4>
-            <p data-i18n="theme-teal-desc">清爽治愈</p></div>
-        <div class="theme-item">
-            <div class="theme-color theme-indigo"></div>
-            <h4 data-i18n="theme-indigo-title">深海蓝</h4>
-            <p data-i18n="theme-indigo-desc">深邃专业</p></div>
-        <div class="theme-item">
-            <div class="theme-color theme-gray"></div>
-            <h4 data-i18n="theme-gray-title">极简灰</h4>
-            <p data-i18n="theme-gray-desc">低调纯粹</p></div>
+        <div class="theme-item"><div class="theme-color theme-blue"></div><h4 data-i18n="theme-blue-title">经典蓝</h4><p data-i18n="theme-blue-desc">沉稳专注</p></div>
+        <div class="theme-item"><div class="theme-color theme-purple"></div><h4 data-i18n="theme-purple-title">优雅紫</h4><p data-i18n="theme-purple-desc">创意灵感</p></div>
+        <div class="theme-item"><div class="theme-color theme-green"></div><h4 data-i18n="theme-green-title">森林绿</h4><p data-i18n="theme-green-desc">清新自然</p></div>
+        <div class="theme-item"><div class="theme-color theme-rose"></div><h4 data-i18n="theme-rose-title">玫瑰红</h4><p data-i18n="theme-rose-desc">热情活力</p></div>
+        <div class="theme-item"><div class="theme-color theme-orange"></div><h4 data-i18n="theme-orange-title">暖阳橙</h4><p data-i18n="theme-orange-desc">温暖积极</p></div>
+        <div class="theme-item"><div class="theme-color theme-teal"></div><h4 data-i18n="theme-teal-title">薄荷绿</h4><p data-i18n="theme-teal-desc">清爽治愈</p></div>
+        <div class="theme-item"><div class="theme-color theme-indigo"></div><h4 data-i18n="theme-indigo-title">深海蓝</h4><p data-i18n="theme-indigo-desc">深邃专业</p></div>
+        <div class="theme-item"><div class="theme-color theme-gray"></div><h4 data-i18n="theme-gray-title">极简灰</h4><p data-i18n="theme-gray-desc">低调纯粹</p></div>
     </div>
 </section>
 
@@ -1181,14 +1095,8 @@
     <h2 data-i18n="mobile-title">📱 与微软待办App · 天生一对</h2>
     <div class="sub" data-i18n="mobile-sub">电脑上随手记，手机端实时同步，移动办公效率倍增</div>
     <div class="mobile-grid">
-        <div class="mobile-card"><img src="img/page/family-app.png" alt="手机截图1">
-            <h3>📲 原生级同步</h3>
-            <p><i class="fa-regular fa-circle-check"></i> 任务、子任务、步骤</p>
-            <p><i class="fa-regular fa-bell"></i> 手机提醒 · 准时触达</p><span class="sync-badge"><i class="fa-regular fa-clock"></i> 实时双向同步</span></div>
-        <div class="mobile-card"><img src="img/page/family-app2.jpg" alt="手机截图2">
-            <h3>🧠 详情步骤明细</h3>
-            <p><i class="fa-regular fa-circle-check"></i> 步骤明细不掉队</p>
-            <p><i class="fa-regular fa-sticky-note"></i> 离线编辑，联机同步</p><span class="sync-badge"><i class="fa-regular fa-face-smile"></i> 微软账号直连</span></div>
+        <div class="mobile-card"><img src="img/page/family-app.png" alt="手机截图1"><h3>📲 原生级同步</h3><p><i class="fa-regular fa-circle-check"></i> 任务、子任务、步骤</p><p><i class="fa-regular fa-bell"></i> 手机提醒 · 准时触达</p><span class="sync-badge"><i class="fa-regular fa-clock"></i> 实时双向同步</span></div>
+        <div class="mobile-card"><img src="img/page/family-app2.jpg" alt="手机截图2"><h3>🧠 详情步骤明细</h3><p><i class="fa-regular fa-circle-check"></i> 步骤明细不掉队</p><p><i class="fa-regular fa-sticky-note"></i> 离线编辑，联机同步</p><span class="sync-badge"><i class="fa-regular fa-face-smile"></i> 微软账号直连</span></div>
     </div>
     <p style="text-align:center; margin-top:2rem; color: var(--primary-color);"><i class="fa-regular fa-circle-check"></i><strong data-i18n="mobile-footnote">所有数据均通过微软官方API与手机App无缝打通，无第三方存储</strong></p>
 </section>
@@ -1198,18 +1106,10 @@
         <h2 data-i18n="p-title">隐私与安全，我们的核心原则</h2>
         <p class="desc" data-i18n="p-desc">我们深知待办事项往往包含个人敏感信息。MS-ToDo 采用以下技术保障您的数据安全：</p>
         <div class="privacy-list">
-            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
-                <div><strong data-i18n="p1-t">数据自主控制：</strong><span data-i18n="p1-d">所有敏感数据存储在本地 IndexedDB，不上传任何第三方服务器存储。</span></div>
-            </div>
-            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
-                <div><strong data-i18n="p2-t">透明同步流向：</strong><span data-i18n="p2-d">仅与微软官方 API 和用户自选的代理节点通信，流量清晰可控。</span></div>
-            </div>
-            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
-                <div><strong data-i18n="p3-t">本地锁保护：</strong><span data-i18n="p3-d">私密列表支持二级密码访问，内容默认隐藏，需主动解锁查看。</span></div>
-            </div>
-            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i>
-                <div><strong data-i18n="p4-t">最小权限原则：</strong><span data-i18n="p4-d">仅申请必要的 API 权限，无任何数据收集行为。</span></div>
-            </div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i><div><strong data-i18n="p1-t">数据自主控制：</strong><span data-i18n="p1-d">所有敏感数据存储在本地 IndexedDB，不上传任何第三方服务器存储。</span></div></div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i><div><strong data-i18n="p2-t">透明同步流向：</strong><span data-i18n="p2-d">仅与微软官方 API 和用户自选的代理节点通信，流量清晰可控。</span></div></div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i><div><strong data-i18n="p3-t">本地锁保护：</strong><span data-i18n="p3-d">私密列表支持二级密码访问，内容默认隐藏，需主动解锁查看。</span></div></div>
+            <div class="privacy-item"><i class="fa-solid fa-circle-check"></i><div><strong data-i18n="p4-t">最小权限原则：</strong><span data-i18n="p4-d">仅申请必要的 API 权限，无任何数据收集行为。</span></div></div>
         </div>
         <div class="privacy-tagline"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="privacy-tagline">你的私事，只有你知道 —— 二级密码保护敏感列表</span></div>
     </div>
@@ -1220,16 +1120,11 @@
     <h2 class="section-title" data-i18n="tech-title">技术架构</h2>
     <p class="section-subtitle" data-i18n="tech-subtitle">现代 Web 技术打造，稳定可靠</p>
     <div class="tech-grid">
-        <div class="tech-item"><i class="fa-solid fa-database"></i><h4>IndexedDB</h4>
-            <p data-i18n="tech-1">本地数据存储</p></div>
-        <div class="tech-item"><i class="fa-brands fa-microsoft"></i><h4>Graph API</h4>
-            <p data-i18n="tech-2">微软官方接口</p></div>
-        <div class="tech-item"><i class="fa-solid fa-cloud"></i><h4>Cloudflare</h4>
-            <p data-i18n="tech-3">Worker 代理</p></div>
-        <div class="tech-item"><i class="fa-solid fa-diagram-project"></i><h4>MindElixir</h4>
-            <p data-i18n="tech-4">思维导图引擎</p></div>
-        <div class="tech-item"><i class="fa-solid fa-lock"></i><h4>OAuth 2.0</h4>
-            <p data-i18n="tech-5">安全认证</p></div>
+        <div class="tech-item"><i class="fa-solid fa-database"></i><h4>IndexedDB</h4><p data-i18n="tech-1">本地数据存储</p></div>
+        <div class="tech-item"><i class="fa-brands fa-microsoft"></i><h4>Graph API</h4><p data-i18n="tech-2">微软官方接口</p></div>
+        <div class="tech-item"><i class="fa-solid fa-cloud"></i><h4>Cloudflare</h4><p data-i18n="tech-3">Worker 代理</p></div>
+        <div class="tech-item"><i class="fa-solid fa-diagram-project"></i><h4>MindElixir</h4><p data-i18n="tech-4">思维导图引擎</p></div>
+        <div class="tech-item"><i class="fa-solid fa-lock"></i><h4>OAuth 2.0</h4><p data-i18n="tech-5">安全认证</p></div>
     </div>
 </section>
 
@@ -1237,18 +1132,12 @@
     <h2 class="section-title" data-i18n="faq-title">常见问题</h2>
     <p class="section-subtitle" data-i18n="faq-subtitle">你可能想了解的</p>
     <div class="faq-grid">
-        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq1-q">MS-ToDo 是免费的吗？</span></h4>
-            <p data-i18n="faq1-a">完全免费开源，所有核心功能均可永久免费使用。打赏仅用于支持作者维护域名和持续开发，完全自愿。</p></div>
-        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq2-q">需要注册微软账号吗？</span></h4>
-            <p data-i18n="faq2-a">是的，MS-ToDo 是微软待办的增强插件，需要登录微软账号同步您的任务数据。所有数据仍归属于您的微软账户。</p></div>
-        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq3-q">离线时能正常使用吗？</span></h4>
-            <p data-i18n="faq3-a">完全可以！MS-ToDo 采用 Local-First 架构，离线时所有操作（增删改查）均正常工作，联网后自动同步到云端。</p></div>
-        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq4-q">如何切换中英文？</span></h4>
-            <p data-i18n="faq4-a">点击页面右下角的语言切换按钮即可在中文和英文之间切换。插件内的语言设置可在设置菜单中调整。</p></div>
-        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq5-q">数据会同步到官方 App 吗？</span></h4>
-            <p data-i18n="faq5-a">是的，所有数据通过微软官方 API 同步，您在插件中的操作会实时同步到微软待办官方 App 和网页版。</p></div>
-        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq6-q">国内用户登录慢怎么办？</span></h4>
-            <p data-i18n="faq6-a">插件内置双区调优功能，登录时选择「中国版」即可使用国内加速节点，显著提升登录和同步速度。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq1-q">MS-ToDo 是免费的吗？</span></h4><p data-i18n="faq1-a">完全免费开源，所有核心功能均可永久免费使用。打赏仅用于支持作者维护域名和持续开发，完全自愿。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq2-q">需要注册微软账号吗？</span></h4><p data-i18n="faq2-a">是的，MS-ToDo 是微软待办的增强插件，需要登录微软账号同步您的任务数据。所有数据仍归属于您的微软账户。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq3-q">离线时能正常使用吗？</span></h4><p data-i18n="faq3-a">完全可以！MS-ToDo 采用 Local-First 架构，离线时所有操作（增删改查）均正常工作，联网后自动同步到云端。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq4-q">如何切换中英文？</span></h4><p data-i18n="faq4-a">点击页面右下角的语言切换按钮即可在中文和英文之间切换。插件内的语言设置可在设置菜单中调整。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq5-q">数据会同步到官方 App 吗？</span></h4><p data-i18n="faq5-a">是的，所有数据通过微软官方 API 同步，您在插件中的操作会实时同步到微软待办官方 App 和网页版。</p></div>
+        <div class="faq-item"><h4><i class="fa-regular fa-circle-question"></i> <span data-i18n="faq6-q">国内用户登录慢怎么办？</span></h4><p data-i18n="faq6-a">插件内置双区调优功能，登录时选择「中国版」即可使用国内加速节点，显著提升登录和同步速度。</p></div>
     </div>
 </section>
 
@@ -1267,7 +1156,9 @@
         <button class="modal-close" onclick="togglePrivacyModal(false)">&times;</button>
         <h2 style="margin-bottom: 0.5rem;" data-i18n="privacy-title">隐私政策</h2>
         <p style="color: var(--text-light); font-size: 0.9rem; border-bottom: 1px solid var(--gray-200); padding-bottom: 1rem;" data-i18n="privacy-updated">最后更新：2026年3月19日</p>
-        <div class="privacy-policy-content" id="privacy-policy-text"></div>
+        <div class="privacy-policy-content" id="privacy-policy-text">
+            <!-- 完整隐私政策内容会通过JS动态填充，保留完整内容 -->
+        </div>
     </div>
 </div>
 
@@ -1277,12 +1168,9 @@
         <h2 style="margin-bottom: 1rem;" data-i18n="s-title">资助作者</h2>
         <p style="color: var(--text-light); font-size: 1rem; margin-bottom: 2rem;" data-i18n="s-desc">如果你觉得 MS-ToDo 提升了你的效率，欢迎请作者喝杯咖啡 ☕️ 所有打赏将用于域名维护和持续开发。</p>
         <div class="qr-container">
-            <div class="qr-item"><img src="img/pay/wechat-qrcode.png" alt="微信支付">
-                <p style="color:#07c160"><i class="fa-brands fa-weixin"></i> WeChat Pay</p></div>
-            <div class="qr-item"><img src="img/pay/alipay-qrcode.png" alt="支付宝">
-                <p style="color:#1677ff"><i class="fa-solid fa-wallet"></i> Alipay</p></div>
-            <div class="qr-item"><img src="img/pay/PayPal-qrcode.png" alt="PayPal">
-                <p style="color:#003087"><i class="fa-brands fa-paypal"></i> PayPal</p></div>
+            <div class="qr-item"><img src="img/pay/wechat-qrcode.png" alt="微信支付"><p style="color:#07c160"><i class="fa-brands fa-weixin"></i> WeChat Pay</p></div>
+            <div class="qr-item"><img src="img/pay/alipay-qrcode.png" alt="支付宝"><p style="color:#1677ff"><i class="fa-solid fa-wallet"></i> Alipay</p></div>
+            <div class="qr-item"><img src="img/pay/PayPal-qrcode.png" alt="PayPal"><p style="color:#003087"><i class="fa-brands fa-paypal"></i> PayPal</p></div>
         </div>
         <p style="margin-top: 2rem; color: var(--text-light); font-size: 0.9rem;" data-i18n="s-footer">感谢每一位支持者的付出 🙏</p>
     </div>
@@ -1301,268 +1189,85 @@
 </footer>
 
 <script>
+    // 完整i18n对象
     const i18n = {
         'zh': {
-            'nav-features': '功能特性',
-            'nav-showcase': '界面预览',
-            'nav-theme': '主题定制',
-            'nav-privacy': '安全隐私',
-            'nav-faq': 'FAQ',
-            'nav-sponsor': '资助作者',
-            'nav-privacypolicy': '隐私政策',
-            'tagline-simple': '新标签页，新效率，新体验，新享受',
-            'tagline-emotional': '待办不该是负担，而是生活的节奏',
-            'hero-desc': 'Local-First · 离线优先 · 智能同步 · 思维导图 · 二级隐私锁',
-            'btn-chrome': 'Chrome 商店',
-            'btn-edge': 'Edge 商店',
-            'btn-github-source': '查看源码',
-            'stat-themes': '颜色主题',
-            'stat-rating': '用户评分',
-            'stat-users': '活跃用户',
-            'stat-offline': '离线可用',
+            'nav-features': '功能特性', 'nav-showcase': '界面预览', 'nav-theme': '主题定制', 'nav-privacy': '安全隐私', 'nav-faq': 'FAQ', 'nav-sponsor': '资助作者', 'nav-privacypolicy': '隐私政策',
+            'tagline-simple': '新标签页，新效率，新体验，新享受', 'tagline-emotional': '待办不该是负担，而是生活的节奏', 'hero-desc': 'Local-First · 离线优先 · 智能同步 · 思维导图 · 二级隐私锁',
+            'btn-chrome': 'Chrome 商店', 'btn-edge': 'Edge 商店', 'btn-github-source': '查看源码', 'stat-themes': '颜色主题', 'stat-rating': '用户评分', 'stat-users': '活跃用户', 'stat-offline': '离线可用',
             'version-badge': '<i class="fa-solid fa-check-double"></i> Microsoft To Do 超级增强版',
-            'waterfall1': '无论身在何处，登录永远快人一步',
-            'waterfall2': '百万级任务，依然丝滑',
-            'waterfall3': '离线编辑，联网自动同步',
-            'waterfall4': '待办变导图，思路更清晰',
-            'waterfall5': '二级密码保护敏感列表',
-            'waterfall6': '手机App无缝同步',
-            'f1-t': '极致性能体验',
-            'f1-d': '采用 Local-First 架构，UI 操作实现零延迟反馈。',
-            'f2-t': '优雅 UI 交互',
-            'f2-d': '适配 Windows 11 设计语言，30+ 颜色主题自由切换。',
-            'f3-t': '双区调优加速',
-            'f3-d': '内置中国区与国际区加速配置。',
-            'f4-t': '跨标签协同锁',
-            'f4-d': '基于 Cross-tab Locking 机制，确保同步有序进行。',
-            'f5-t': '智能差分同步',
-            'f5-d': '仅同步变更数据，流量消耗降低 90%。',
-            'f6-t': '离线沙箱引擎',
-            'f6-d': '全功能离线编辑，联网后自动同步。',
-            'f7-t': '可视化任务导图',
-            'f7-d': '一键转化为思维导图，支持导出 PNG/PDF。',
-            'f8-t': 'Secondary 隐私锁',
-            'f8-d': '支持为特定列表设置本地二级密码。',
-            'showcase-title': '不止于待办，更是效率利器',
-            'showcase-subtitle': '深度优化的工作流，让任务管理成为一种享受',
-            'showcase-1-title': '沉浸式任务管理',
-            'showcase-1-1': '任务/子任务二级结构',
-            'showcase-1-1-d': ' - 复杂项目轻松拆解',
-            'showcase-1-2': '智能图标匹配',
-            'showcase-1-2-d': ' - 任务类型一目了然',
-            'showcase-1-3': '四种排序规则',
-            'showcase-1-3-d': ' - 按时间、重要性灵活组织',
-            'showcase-1-4': '截止日期提醒',
-            'showcase-1-4-d': ' - 不错过任何重要事项',
-            'showcase-quote-1': '新标签页，新效率，新体验，新享受',
-            'showcase-2-title': '思维导图视图',
-            'showcase-2-1': '一键转换',
-            'showcase-2-1-d': ' - 列表 ↔ 思维导图无缝切换',
-            'showcase-2-2': '多级展示',
-            'showcase-2-2-d': ' - 任务与子任务层级清晰',
-            'showcase-2-3': '导出功能',
-            'showcase-2-3-d': ' - 支持 PNG / PDF 导出',
-            'showcase-2-4': '自由拖拽',
-            'showcase-2-4-d': ' - 平移查看，双击复位',
-            'showcase-quote-2': '待办不该是负担，而是生活的节奏',
-            'theme-title': '高级主题颜色定制',
-            'theme-subtitle': '30+ 精心调校的色彩方案',
-            'theme-blue-title': '经典蓝',
-            'theme-blue-desc': '沉稳专注',
-            'theme-purple-title': '优雅紫',
-            'theme-purple-desc': '创意灵感',
-            'theme-green-title': '森林绿',
-            'theme-green-desc': '清新自然',
-            'theme-rose-title': '玫瑰红',
-            'theme-rose-desc': '热情活力',
-            'theme-orange-title': '暖阳橙',
-            'theme-orange-desc': '温暖积极',
-            'theme-teal-title': '薄荷绿',
-            'theme-teal-desc': '清爽治愈',
-            'theme-indigo-title': '深海蓝',
-            'theme-indigo-desc': '深邃专业',
-            'theme-gray-title': '极简灰',
-            'theme-gray-desc': '低调纯粹',
-            'mobile-title': '📱 与微软待办App · 天生一对',
-            'mobile-sub': '电脑上随手记，手机端实时同步',
-            'mobile-footnote': '所有数据均通过微软官方API与手机App无缝打通',
-            'p-title': '隐私与安全，我们的核心原则',
-            'p-desc': 'MS-ToDo 采用以下技术保障您的数据安全：',
-            'p1-t': '数据自主控制：',
-            'p1-d': '所有敏感数据存储在本地 IndexedDB。',
-            'p2-t': '透明同步流向：',
-            'p2-d': '仅与微软官方 API 通信。',
-            'p3-t': '本地锁保护：',
-            'p3-d': '私密列表支持二级密码访问。',
-            'p4-t': '最小权限原则：',
-            'p4-d': '仅申请必要的 API 权限。',
+            'waterfall1': '无论身在何处，登录永远快人一步', 'waterfall2': '百万级任务，依然丝滑', 'waterfall3': '离线编辑，联网自动同步', 'waterfall4': '待办变导图，思路更清晰', 'waterfall5': '二级密码保护敏感列表', 'waterfall6': '手机App无缝同步',
+            'f1-t': '极致性能体验', 'f1-d': '采用 Local-First 架构，UI 操作实现零延迟反馈，彻底告别原生网页版的加载等待感。百万级任务流畅运行。',
+            'f2-t': '优雅 UI 交互', 'f2-d': '适配 Windows 11 设计语言。支持自动暗黑模式、智能任务图标匹配与丝滑的侧边栏交互。30+ 颜色主题自由切换。',
+            'f3-t': '双区调优加速', 'f3-d': '内置中国区与国际区加速配置，针对性解决国内环境下登录缓慢与同步断连的顽疾。智能路由，自动切换最优节点。',
+            'f4-t': '跨标签协同锁', 'f4-d': '基于 Cross-tab Locking 机制，无论开启多少浏览器窗口，均能确保同步任务有序进行，彻底杜绝冲突与重复同步。',
+            'f5-t': '智能差分同步', 'f5-d': '仅同步变更数据，配合指数重试算法，在网络波动环境下亦能保证任务百分百触达云端。流量消耗降低 90%。',
+            'f6-t': '离线沙箱引擎', 'f6-d': '支持全功能离线编辑。无网络时自由增删改查，待联网后自动执行智能差分合并同步，数据永不丢失。',
+            'f7-t': '可视化任务导图', 'f7-d': '一键将待办列表转化为思维导图，支持多级子任务展示，让复杂项目脉络清晰可见。支持导出为 PNG/PDF。',
+            'f8-t': 'Secondary 隐私锁', 'f8-d': '支持为特定列表设置本地二级密码。即使电脑处于解锁状态，你的私密任务依然固若金汤。内容一键隐藏。',
+            'showcase-title': '不止于待办，更是效率利器', 'showcase-subtitle': '深度优化的工作流，让任务管理成为一种享受',
+            'showcase-1-title': '沉浸式任务管理', 'showcase-1-1': '任务/子任务二级结构', 'showcase-1-1-d': ' - 复杂项目轻松拆解', 'showcase-1-2': '智能图标匹配', 'showcase-1-2-d': ' - 任务类型一目了然', 'showcase-1-3': '四种排序规则', 'showcase-1-3-d': ' - 按时间、重要性灵活组织', 'showcase-1-4': '截止日期提醒', 'showcase-1-4-d': ' - 不错过任何重要事项', 'showcase-quote-1': '新标签页，新效率，新体验，新享受',
+            'showcase-2-title': '思维导图视图', 'showcase-2-1': '一键转换', 'showcase-2-1-d': ' - 列表 ↔ 思维导图无缝切换', 'showcase-2-2': '多级展示', 'showcase-2-2-d': ' - 任务与子任务层级清晰', 'showcase-2-3': '导出功能', 'showcase-2-3-d': ' - 支持 PNG / PDF 导出', 'showcase-2-4': '自由拖拽', 'showcase-2-4-d': ' - 平移查看，双击复位', 'showcase-quote-2': '待办不该是负担，而是生活的节奏',
+            'theme-title': '高级主题颜色定制', 'theme-subtitle': '30+ 精心调校的色彩方案，总有一款适合你',
+            'theme-blue-title': '经典蓝', 'theme-blue-desc': '沉稳专注', 'theme-purple-title': '优雅紫', 'theme-purple-desc': '创意灵感', 'theme-green-title': '森林绿', 'theme-green-desc': '清新自然', 'theme-rose-title': '玫瑰红', 'theme-rose-desc': '热情活力', 'theme-orange-title': '暖阳橙', 'theme-orange-desc': '温暖积极', 'theme-teal-title': '薄荷绿', 'theme-teal-desc': '清爽治愈', 'theme-indigo-title': '深海蓝', 'theme-indigo-desc': '深邃专业', 'theme-gray-title': '极简灰', 'theme-gray-desc': '低调纯粹',
+            'mobile-title': '📱 与微软待办App · 天生一对', 'mobile-sub': '电脑上随手记，手机端实时同步，移动办公效率倍增', 'mobile-footnote': '所有数据均通过微软官方API与手机App无缝打通，无第三方存储',
+            'p-title': '隐私与安全，我们的核心原则', 'p-desc': '我们深知待办事项往往包含个人敏感信息。MS-ToDo 采用以下技术保障您的数据安全：',
+            'p1-t': '数据自主控制：', 'p1-d': '所有敏感数据存储在本地 IndexedDB，不上传任何第三方服务器存储。',
+            'p2-t': '透明同步流向：', 'p2-d': '仅与微软官方 API 和用户自选的代理节点通信，流量清晰可控。',
+            'p3-t': '本地锁保护：', 'p3-d': '私密列表支持二级密码访问，内容默认隐藏，需主动解锁查看。',
+            'p4-t': '最小权限原则：', 'p4-d': '仅申请必要的 API 权限，无任何数据收集行为。',
             'privacy-tagline': '你的私事，只有你知道 —— 二级密码保护敏感列表',
-            'tech-title': '技术架构',
-            'tech-subtitle': '现代 Web 技术打造',
-            'tech-1': '本地数据存储',
-            'tech-2': '微软官方接口',
-            'tech-3': 'Worker 代理',
-            'tech-4': '思维导图引擎',
-            'tech-5': '安全认证',
-            'faq-title': '常见问题',
-            'faq-subtitle': '你可能想了解的',
-            'faq1-q': 'MS-ToDo 是免费的吗？',
-            'faq1-a': '完全免费开源。',
-            'faq2-q': '需要注册微软账号吗？',
-            'faq2-a': '是的，需要登录微软账号。',
-            'faq3-q': '离线时能正常使用吗？',
-            'faq3-a': '完全可以！',
-            'faq4-q': '如何切换中英文？',
-            'faq4-a': '点击语言切换按钮。',
-            'faq5-q': '数据会同步到官方 App 吗？',
-            'faq5-a': '是的，实时同步。',
-            'faq6-q': '国内用户登录慢怎么办？',
-            'faq6-a': '内置双区调优功能。',
-            'cta-quote': '让每一次浏览器打开，都成为 productivity 的起点',
-            'cta-title': '立即体验极简高效的待办管理',
-            'cta-desc': '加入上万名用户',
-            's-title': '资助作者',
-            's-desc': '欢迎请作者喝杯咖啡 ☕️',
-            's-footer': '感谢每一位支持者',
-            'footer-repo': '代码仓库',
-            'footer-issue': '提交 Issue',
-            'footer-contact': '联系作者',
-            'footer-privacy': '隐私政策',
-            'footer-copy': '基于 Microsoft To Do 官方 API 构建',
-            'footer-version': '当前版本 v4.5.7',
-            'privacy-title': '隐私政策',
-            'privacy-updated': '最后更新：2026年3月19日'
+            'tech-title': '技术架构', 'tech-subtitle': '现代 Web 技术打造，稳定可靠', 'tech-1': '本地数据存储', 'tech-2': '微软官方接口', 'tech-3': 'Worker 代理', 'tech-4': '思维导图引擎', 'tech-5': '安全认证',
+            'faq-title': '常见问题', 'faq-subtitle': '你可能想了解的',
+            'faq1-q': 'MS-ToDo 是免费的吗？', 'faq1-a': '完全免费开源，所有核心功能均可永久免费使用。打赏仅用于支持作者维护域名和持续开发，完全自愿。',
+            'faq2-q': '需要注册微软账号吗？', 'faq2-a': '是的，MS-ToDo 是微软待办的增强插件，需要登录微软账号同步您的任务数据。所有数据仍归属于您的微软账户。',
+            'faq3-q': '离线时能正常使用吗？', 'faq3-a': '完全可以！MS-ToDo 采用 Local-First 架构，离线时所有操作（增删改查）均正常工作，联网后自动同步到云端。',
+            'faq4-q': '如何切换中英文？', 'faq4-a': '点击页面右下角的语言切换按钮即可在中文和英文之间切换。插件内的语言设置可在设置菜单中调整。',
+            'faq5-q': '数据会同步到官方 App 吗？', 'faq5-a': '是的，所有数据通过微软官方 API 同步，您在插件中的操作会实时同步到微软待办官方 App 和网页版。',
+            'faq6-q': '国内用户登录慢怎么办？', 'faq6-a': '插件内置双区调优功能，登录时选择「中国版」即可使用国内加速节点，显著提升登录和同步速度。',
+            'cta-quote': '让每一次浏览器打开，都成为 productivity 的起点', 'cta-title': '立即体验极简高效的待办管理', 'cta-desc': '加入上万名用户，让新标签页不只是空白，而是你的效率起点',
+            's-title': '资助作者', 's-desc': '如果你觉得 MS-ToDo 提升了你的效率，欢迎请作者喝杯咖啡 ☕️ 所有打赏将用于域名维护和持续开发。', 's-footer': '感谢每一位支持者的付出 🙏',
+            'footer-repo': '代码仓库', 'footer-issue': '提交 Issue', 'footer-contact': '联系作者', 'footer-privacy': '隐私政策', 'footer-copy': '基于 Microsoft To Do 官方 API 构建，与微软公司无附属关系。', 'footer-version': '当前版本 v4.5.7 | 更新于 2026-02-25',
+            'privacy-title': '隐私政策', 'privacy-updated': '最后更新：2026年3月19日'
         },
         'en': {
-            'nav-features': 'Features',
-            'nav-showcase': 'Showcase',
-            'nav-theme': 'Themes',
-            'nav-privacy': 'Privacy',
-            'nav-faq': 'FAQ',
-            'nav-sponsor': 'Sponsor',
-            'nav-privacypolicy': 'Privacy Policy',
-            'tagline-simple': 'New Tab, New Efficiency',
-            'tagline-emotional': 'To-dos are the rhythm of life',
-            'hero-desc': 'Local-First · Offline Priority · Smart Sync · Mind Map',
-            'btn-chrome': 'Chrome Store',
-            'btn-edge': 'Edge Store',
-            'btn-github-source': 'Source Code',
-            'stat-themes': 'Color Themes',
-            'stat-rating': 'Rating',
-            'stat-users': 'Active Users',
-            'stat-offline': 'Offline Ready',
-            'version-badge': '<i class="fa-solid fa-check-double"></i> Microsoft To Do Supercharged',
-            'waterfall1': 'Login one step ahead',
-            'waterfall2': 'Millions of tasks smooth',
-            'waterfall3': 'Offline edit, auto-sync',
-            'waterfall4': 'To-dos to mind maps',
-            'waterfall5': 'Secondary password',
-            'waterfall6': 'Mobile sync',
-            'f1-t': 'Extreme Performance',
-            'f1-d': 'Local-First architecture.',
-            'f2-t': 'Elegant UI',
-            'f2-d': '30+ color themes.',
-            'f3-t': 'Dual-Zone Acceleration',
-            'f3-d': 'Smart routing.',
-            'f4-t': 'Cross-Tab Lock',
-            'f4-d': 'Orderly sync.',
-            'f5-t': 'Smart Differential Sync',
-            'f5-d': 'Reduces traffic by 90%.',
-            'f6-t': 'Offline Engine',
-            'f6-d': 'Full offline editing.',
-            'f7-t': 'Mind Map',
-            'f7-d': 'Export as PNG/PDF.',
-            'f8-t': 'Privacy Lock',
-            'f8-d': 'Secondary password for lists.',
-            'showcase-title': 'More Than a To-Do',
-            'showcase-subtitle': 'Deeply optimized workflow',
-            'showcase-1-title': 'Immersive Task Management',
-            'showcase-1-1': 'Task/Subtask hierarchy',
-            'showcase-1-1-d': ' - break down projects',
-            'showcase-1-2': 'Smart icons',
-            'showcase-1-2-d': ' - at a glance',
-            'showcase-1-3': 'Four sorts',
-            'showcase-1-3-d': ' - by time, importance',
-            'showcase-1-4': 'Deadline reminders',
-            'showcase-1-4-d': ' - never miss',
-            'showcase-quote-1': 'New Tab, New Efficiency',
-            'showcase-2-title': 'Mind Map View',
-            'showcase-2-1': 'One-click convert',
-            'showcase-2-1-d': ' - seamless switch',
-            'showcase-2-2': 'Multi-level display',
-            'showcase-2-2-d': ' - clear hierarchy',
-            'showcase-2-3': 'Export',
-            'showcase-2-3-d': ' - PNG/PDF',
-            'showcase-2-4': 'Free pan & zoom',
-            'showcase-2-4-d': ' - pan view',
-            'showcase-quote-2': 'To-dos are the rhythm of life',
-            'theme-title': 'Theme Customization',
-            'theme-subtitle': '30+ color schemes',
-            'theme-blue-title': 'Classic Blue',
-            'theme-blue-desc': 'Calm',
-            'theme-purple-title': 'Elegant Purple',
-            'theme-purple-desc': 'Creative',
-            'theme-green-title': 'Forest Green',
-            'theme-green-desc': 'Fresh',
-            'theme-rose-title': 'Rosy Red',
-            'theme-rose-desc': 'Passionate',
-            'theme-orange-title': 'Warm Orange',
-            'theme-orange-desc': 'Warm',
-            'theme-teal-title': 'Mint Green',
-            'theme-teal-desc': 'Refreshing',
-            'theme-indigo-title': 'Deep Blue',
-            'theme-indigo-desc': 'Professional',
-            'theme-gray-title': 'Minimalist Gray',
-            'theme-gray-desc': 'Pure',
-            'mobile-title': '📱 Perfect Match with Microsoft To-Do App',
-            'mobile-sub': 'Jot down on PC, sync instantly',
-            'mobile-footnote': 'All data syncs via official Microsoft API',
-            'p-title': 'Privacy & Security',
-            'p-desc': 'MS-ToDo protects your data:',
-            'p1-t': 'Local Control: ',
-            'p1-d': 'Data stored locally.',
-            'p2-t': 'Transparent Sync: ',
-            'p2-d': 'Only official API.',
-            'p3-t': 'Local Lock: ',
-            'p3-d': 'Secondary password.',
-            'p4-t': 'Least Privilege: ',
-            'p4-d': 'Only necessary permissions.',
-            'privacy-tagline': 'Your private matters, only you know',
-            'tech-title': 'Technology Stack',
-            'tech-subtitle': 'Modern web tech',
-            'tech-1': 'Local storage',
-            'tech-2': 'Graph API',
-            'tech-3': 'Cloudflare',
-            'tech-4': 'Mind map engine',
-            'tech-5': 'OAuth 2.0',
-            'faq-title': 'FAQ',
-            'faq-subtitle': 'You might want to know',
-            'faq1-q': 'Is MS-ToDo free?',
-            'faq1-a': 'Completely free.',
-            'faq2-q': 'Need Microsoft account?',
-            'faq2-a': 'Yes.',
-            'faq3-q': 'Offline usage?',
-            'faq3-a': 'Absolutely!',
-            'faq4-q': 'Switch language?',
-            'faq4-a': 'Click language button.',
-            'faq5-q': 'Sync to official app?',
-            'faq5-a': 'Yes.',
-            'faq6-q': 'Slow login?',
-            'faq6-a': 'Use dual-zone optimization.',
-            'cta-quote': 'Make every browser tab productive',
-            'cta-title': 'Experience Efficient Task Management',
-            'cta-desc': 'Join thousands of users',
-            's-title': 'Sponsor',
-            's-desc': 'Buy the author a coffee ☕️',
-            's-footer': 'Thanks to all supporters',
-            'footer-repo': 'Repository',
-            'footer-issue': 'Submit Issue',
-            'footer-contact': 'Contact',
-            'footer-privacy': 'Privacy Policy',
-            'footer-copy': 'Built on Microsoft To-Do API',
-            'footer-version': 'Version v4.5.7',
-            'privacy-title': 'Privacy Policy',
-            'privacy-updated': 'Last updated: March 19, 2026'
+            'nav-features': 'Features', 'nav-showcase': 'Showcase', 'nav-theme': 'Themes', 'nav-privacy': 'Privacy', 'nav-faq': 'FAQ', 'nav-sponsor': 'Sponsor', 'nav-privacypolicy': 'Privacy Policy',
+            'tagline-simple': 'New Tab, New Efficiency, New Experience', 'tagline-emotional': 'To-dos are not burdens, but the rhythm of life', 'hero-desc': 'Local-First · Offline Priority · Smart Sync · Mind Map · 2nd Privacy Lock',
+            'btn-chrome': 'Chrome Store', 'btn-edge': 'Edge Store', 'btn-github-source': 'Source Code', 'stat-themes': 'Color Themes', 'stat-rating': 'User Rating', 'stat-users': 'Active Users', 'stat-offline': 'Offline Ready',
+            'version-badge': '<i class="fa-solid fa-check-double"></i> Microsoft To Do Supercharged Edition',
+            'waterfall1': 'Wherever you are, login is always one step ahead', 'waterfall2': 'Millions of tasks, still buttery smooth', 'waterfall3': 'Edit offline, auto-sync when online', 'waterfall4': 'To-dos to mind maps, clarity at a glance', 'waterfall5': 'Secondary password protects sensitive lists', 'waterfall6': 'Seamless sync with mobile app',
+            'f1-t': 'Extreme Performance', 'f1-d': 'Local-First architecture delivers zero-latency UI feedback, eliminating the loading waits of the native web version. Millions of tasks run smoothly.',
+            'f2-t': 'Elegant UI/UX', 'f2-d': 'Adapts to Windows 11 design language. Supports auto dark mode, smart task icons, and silky sidebar interactions. 30+ color themes.',
+            'f3-t': 'Dual-Zone Acceleration', 'f3-d': 'Built-in acceleration profiles for China and global regions, solving slow logins and sync drops. Smart routing auto-switches to the best node.',
+            'f4-t': 'Cross-Tab Lock', 'f4-d': 'Based on Cross-tab Locking mechanism, ensures orderly sync tasks across any number of browser windows, completely eliminating conflicts and duplicate syncs.',
+            'f5-t': 'Smart Differential Sync', 'f5-d': 'Syncs only changed data. With exponential backoff algorithm, guarantees 100% task delivery to the cloud even under network fluctuations. Reduces traffic by 90%.',
+            'f6-t': 'Offline Sandbox Engine', 'f6-d': 'Full-featured offline editing. Freely add, delete, modify, and query without internet. Auto-merges via smart diff sync when back online. Data never lost.',
+            'f7-t': 'Visual Mind Map', 'f7-d': 'One-click convert to-do lists into mind maps, supports multi-level subtasks, making complex projects clear. Export as PNG/PDF.',
+            'f8-t': 'Secondary Privacy Lock', 'f8-d': 'Set a local secondary password for specific lists. Even if your PC is unlocked, your private tasks remain secure. One-click hide content.',
+            'showcase-title': 'More Than a To-Do, an Efficiency Tool', 'showcase-subtitle': 'Deeply optimized workflow makes task management a pleasure',
+            'showcase-1-title': 'Immersive Task Management', 'showcase-1-1': 'Task/Subtask hierarchy', 'showcase-1-1-d': ' - break down complex projects', 'showcase-1-2': 'Smart icon matching', 'showcase-1-2-d': ' - task types at a glance', 'showcase-1-3': 'Four sorting rules', 'showcase-1-3-d': ' - by time, importance, etc.', 'showcase-1-4': 'Deadline reminders', 'showcase-1-4-d': ' - never miss important items', 'showcase-quote-1': 'New Tab, New Efficiency, New Experience',
+            'showcase-2-title': 'Mind Map View', 'showcase-2-1': 'One-click convert', 'showcase-2-1-d': ' - seamless switch list ↔ mind map', 'showcase-2-2': 'Multi-level display', 'showcase-2-2-d': ' - clear task & subtask hierarchy', 'showcase-2-3': 'Export', 'showcase-2-3-d': ' - PNG / PDF support', 'showcase-2-4': 'Free pan & zoom', 'showcase-2-4-d': ' - pan to view, double-click to reset', 'showcase-quote-2': 'To-dos are not burdens, but the rhythm of life',
+            'theme-title': 'Advanced Theme Customization', 'theme-subtitle': '30+ carefully tuned color schemes, one is sure to fit you',
+            'theme-blue-title': 'Classic Blue', 'theme-blue-desc': 'Calm & Focused', 'theme-purple-title': 'Elegant Purple', 'theme-purple-desc': 'Creative Inspiration', 'theme-green-title': 'Forest Green', 'theme-green-desc': 'Fresh & Natural', 'theme-rose-title': 'Rosy Red', 'theme-rose-desc': 'Passionate & Energetic', 'theme-orange-title': 'Warm Orange', 'theme-orange-desc': 'Warm & Positive', 'theme-teal-title': 'Mint Green', 'theme-teal-desc': 'Refreshing & Soothing', 'theme-indigo-title': 'Deep Blue', 'theme-indigo-desc': 'Deep & Professional', 'theme-gray-title': 'Minimalist Gray', 'theme-gray-desc': 'Understated & Pure',
+            'mobile-title': '📱 Perfect Match with Microsoft To-Do App', 'mobile-sub': 'Jot down on PC, sync instantly on mobile — double your mobile office efficiency', 'mobile-footnote': 'All data flows through official Microsoft API to your phone app. No third-party storage.',
+            'p-title': 'Privacy & Security, Our Core Principles', 'p-desc': 'We know to-dos often contain personal info. MS-ToDo uses these technologies to protect your data:',
+            'p1-t': 'Local Control: ', 'p1-d': 'All sensitive data stored in local IndexedDB, never uploaded to any third-party server.',
+            'p2-t': 'Transparent Sync: ', 'p2-d': 'Communicates only with Microsoft official API and user-selected proxy nodes. Traffic is clear and controllable.',
+            'p3-t': 'Local Lock: ', 'p3-d': 'Private lists support secondary password. Content is hidden by default, requiring active unlock.',
+            'p4-t': 'Least Privilege: ', 'p4-d': 'Only requests necessary API permissions. No data collection whatsoever.',
+            'privacy-tagline': 'Your private matters, only you know — secondary password for sensitive lists',
+            'tech-title': 'Technology Stack', 'tech-subtitle': 'Built with modern web tech, stable & reliable', 'tech-1': 'Local data storage', 'tech-2': 'Microsoft Graph API', 'tech-3': 'Cloudflare Worker', 'tech-4': 'Mind map engine', 'tech-5': 'OAuth 2.0',
+            'faq-title': 'Frequently Asked Questions', 'faq-subtitle': 'You might want to know',
+            'faq1-q': 'Is MS-ToDo free?', 'faq1-a': 'Completely free and open-source. All core features are free forever. Donations only support maintenance and development, entirely voluntary.',
+            'faq2-q': 'Do I need a Microsoft account?', 'faq2-a': 'Yes, MS-ToDo is an enhancement for Microsoft To-Do. You need to sign in with your Microsoft account to sync tasks. All data remains in your Microsoft account.',
+            'faq3-q': 'Does it work offline?', 'faq3-a': 'Absolutely! With Local-First architecture, all operations work normally offline. Changes sync automatically when back online.',
+            'faq4-q': 'How to switch between Chinese and English?', 'faq4-a': 'Click the language switch button at the bottom right corner to toggle. Language settings inside the plugin can be adjusted in the settings menu.',
+            'faq5-q': 'Will data sync to the official app?', 'faq5-a': 'Yes, all data syncs via the official Microsoft API. Changes in the plugin sync instantly to the official Microsoft To-Do app and web version.',
+            'faq6-q': 'Login is slow for users in China?', 'faq6-a': 'The plugin has a built-in dual-zone optimization feature. Choose the "China" option during login to use domestic acceleration nodes, significantly improving login and sync speed.',
+            'cta-quote': 'Make every browser tab the starting point of productivity', 'cta-title': 'Experience Minimalist & Efficient Task Management Now', 'cta-desc': 'Join tens of thousands of users. Let your new tab be more than blank — be your efficiency launchpad.',
+            's-title': 'Sponsor the Author', 's-desc': 'If MS-ToDo boosts your efficiency, feel free to buy the author a coffee ☕️ All donations support server maintenance and ongoing development.', 's-footer': 'Thanks to every supporter 🙏',
+            'footer-repo': 'Repository', 'footer-issue': 'Submit Issue', 'footer-contact': 'Contact Author', 'footer-privacy': 'Privacy Policy', 'footer-copy': 'Built on Microsoft To-Do official API. Not affiliated with Microsoft.', 'footer-version': 'Version v4.5.7 | Updated 2026-02-25',
+            'privacy-title': 'Privacy Policy', 'privacy-updated': 'Last updated: March 19, 2026'
         }
     };
 
@@ -1580,11 +1285,33 @@
             }
         });
         document.getElementById('lang-btn-text').innerText = currentLang === 'zh' ? 'English' : '中文';
+
+        // 完整隐私政策内容
         const privacyDiv = document.getElementById('privacy-policy-text');
         if (privacyDiv) {
-            privacyDiv.innerHTML = currentLang === 'zh'
-                ? '<h3>一、关于我们</h3><p>本网站<strong>不收集、不存储、不处理任何用户的个人身份信息</strong>。</p><h3>二、我们收集的信息</h3><p><strong>我们明确声明：本网站不收集用户的任何个人信息。</strong></p><h3>三、关于第三方服务</h3><p>使用 Google AdSense 可能放置Cookie。</p><h3>四、Cookie的使用</h3><p>Google AdSense 可能会设置Cookie。</p><h3>五、联系我们</h3><p>欢迎通过GitHub联系。</p>'
-                : '<h3>1. About Us</h3><p>We <strong>do not collect any personal information</strong>.</p><h3>2. Information We Collect</h3><p>No personal information collected.</p><h3>3. Third-Party Services</h3><p>Google AdSense may place cookies.</p><h3>4. Cookies</h3><p>AdSense may set cookies.</p><h3>5. Contact Us</h3><p>Reach us via GitHub.</p>';
+            if (currentLang === 'zh') {
+                privacyDiv.innerHTML = `
+                        <h3>一、关于我们</h3><p>本网站是一个产品介绍页面，我们本身<strong>不收集、不存储、不处理任何用户的个人身份信息</strong>。</p>
+                        <h3>二、我们收集的信息</h3><p><strong>我们明确声明：本网站不收集用户的任何个人信息。</strong>您无需注册、登录或提供任何形式的个人资料即可访问本网站。</p>
+                        <h3>三、关于第三方服务</h3><p>虽然我们本身不收集信息，但为了网站的基本运行和安全保障，我们可能会使用以下第三方服务：</p><ul><li><strong>Google AdSense</strong>：可能会在您的浏览器中放置Cookie，以根据您之前的访问情况向您展示个性化广告。Google负责管理这些信息。您可以访问Google的隐私政策了解详情。</li><li><strong>网站服务器日志</strong>：托管服务商可能会自动记录标准服务器日志（如IP地址、浏览器类型），仅用于安全维护和故障排查。</li></ul>
+                        <h3>四、Cookie的使用</h3><p>我们本身不使用Cookie。但Google AdSense可能会设置Cookie以提供相关广告。您可以通过浏览器设置拒绝或管理Cookie。</p>
+                        <h3>五、儿童隐私</h3><p>我们的网站面向普通大众，不会故意收集任何儿童的信息。</p>
+                        <h3>六、您的选择</h3><p>由于我们本身不收集您的任何信息，您无需提出数据访问或删除请求。对于第三方服务，您可以通过Google的广告设置关闭个性化广告。</p>
+                        <h3>七、隐私政策的变更</h3><p>我们可能会不时更新本隐私政策，更新后将在本页面发布。</p>
+                        <h3>八、联系我们</h3><p>如有疑问，欢迎通过GitHub或网站底部的"联系作者"与我们取得联系。</p>
+                    `;
+            } else {
+                privacyDiv.innerHTML = `
+                        <h3>1. About Us</h3><p>This website is a product introduction page. We <strong>do not collect, store, or process any personal information</strong> from users.</p>
+                        <h3>2. Information We Collect</h3><p><strong>We explicitly state: This website does not collect any personal information.</strong> You can access the site without registration or providing any personal data.</p>
+                        <h3>3. Third-Party Services</h3><p>Although we do not collect information ourselves, we may use the following third-party services for basic operation and security:</p><ul><li><strong>Google AdSense</strong>: May place cookies to show personalized ads. Google manages this data. See Google's privacy policy for details.</li><li><strong>Server Logs</strong>: Hosting providers may automatically record standard server logs (e.g., IP, browser type) for security and troubleshooting.</li></ul>
+                        <h3>4. Cookies</h3><p>We do not use cookies ourselves. However, Google AdSense may set cookies. You can manage cookies via browser settings.</p>
+                        <h3>5. Children's Privacy</h3><p>Our site is general audience. We do not knowingly collect information from children.</p>
+                        <h3>6. Your Choices</h3><p>As we collect no data, you don't need to request access or deletion. For third parties, you can opt out of personalized ads via Google's ad settings.</p>
+                        <h3>7. Changes to This Policy</h3><p>We may update this policy; changes will be posted here.</p>
+                        <h3>8. Contact Us</h3><p>Questions? Reach us via GitHub or the "Contact Author" link at the footer.</p>
+                    `;
+            }
         }
     }
 
@@ -1594,12 +1321,14 @@
     }
 
     function toggleSponsorModal(show) {
-        document.getElementById('sponsorModal').style.display = show ? 'flex' : 'none';
+        const modal = document.getElementById('sponsorModal');
+        modal.style.display = show ? 'flex' : 'none';
         document.body.style.overflow = show ? 'hidden' : '';
     }
 
     function togglePrivacyModal(show) {
-        document.getElementById('privacyModal').style.display = show ? 'flex' : 'none';
+        const modal = document.getElementById('privacyModal');
+        modal.style.display = show ? 'flex' : 'none';
         document.body.style.overflow = show ? 'hidden' : '';
     }
 
@@ -1607,7 +1336,7 @@
     let carouselStates = {};
 
     function initCarousel(id, totalSlides) {
-        carouselStates[id] = {index: 0, total: totalSlides};
+        carouselStates[id] = { index: 0, total: totalSlides };
         updateCarousel(id);
         renderDots(id);
     }
@@ -1657,14 +1386,15 @@
     window.prevSlide = prevSlide;
     window.nextSlide = nextSlide;
 
-    // 动态slogan
+    // 动态slogan打字效果
     const sloganList = currentLang === 'zh'
         ? ['让每一次浏览器打开，都成为 productivity 的起点', '手机App同步，移动办公无缝接力', '离线编辑，联网自动同步', '待办一键变思维导图', '二级隐私锁，你的私事只有你知道']
-        : ['Make every browser tab productive', 'Seamless mobile sync', 'Offline edit, auto-sync', 'One-click to mind map', 'Secondary privacy lock'];
+        : ['Make every browser tab the starting point of productivity', 'Mobile app sync, seamless mobile office', 'Edit offline, auto-sync when online', 'One-click to-dos to mind map', 'Secondary privacy lock — your private matters, only you know'];
     let sloganIndex = 0, charIndex = 0, isDeleting = false;
     const dynamicElement = document.getElementById('dynamic-slogan');
 
     function typeEffect() {
+        if (!dynamicElement) return;
         const currentText = sloganList[sloganIndex];
         if (isDeleting) {
             charIndex--;
