@@ -9,7 +9,11 @@
             const code = params.get("code");
 
             if (!code) {
-                document.body.innerHTML = "<h2>❌ 未检测到授权码</h2>";
+                document.body.innerHTML = `
+                    <h2>❌ 未检测到授权码</h2>
+                    <a class="cta" href="https://mstodo.dpdns.org" target="_blank" id="cta">
+                        访问 MS ToDo 官网
+                    </a>`;
                 return;
             }
 
@@ -27,11 +31,10 @@
             document.body.innerHTML = `
         <h2>✅ 授权成功！</h2>
         <p>正在通知插件，请稍候...</p>
-<!--        <p style="color:#999;font-size:12px;">如果插件未响应，请手动复制授权码：</p>-->
-<!--        <pre style="background:#f5f5f5;padding:8px;border-radius:4px;">${code}</pre>-->
-      `;
+        <a class="cta" href="https://mstodo.dpdns.org" target="_blank" id="cta">访问 MS ToDo 官网</a>`;
 
-            // 🔑 关键：延迟 3 秒再尝试关闭，让插件轮询能检测到 URL
+
+            // 🔑 关键：延迟 4 秒再尝试关闭，让插件轮询能检测到 URL
             setTimeout(() => {
                 try {
                     // 再次尝试通知
@@ -45,7 +48,7 @@
                     window.close();
                 } catch {
                 }
-            }, 5000);
+            }, 4000);
         });
     </script>
 </head>
