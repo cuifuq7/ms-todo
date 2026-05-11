@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Microsoft OAuth 回调</title>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -13,23 +13,40 @@
                 return;
             }
 
+            // 1. 尝试 opener.postMessage（大概率失败，但保留）
             try {
                 if (window.opener && !window.opener.closed) {
-                    console.log("📡 向插件发送授权码...");
-                    window.opener.postMessage({ type: "oauth_code", code }, "*");
-                    document.body.innerHTML = "<h2>✅ 授权成功！正在通知插件...</h2>";
-                    setTimeout(() => { try { window.close(); } catch {} }, 1000);
-                    return;
+                    window.opener.postMessage({type: "oauth_code", code}, "*");
+                    console.log("📡 postMessage 已发送");
                 }
             } catch (e) {
-                console.warn("⚠️ postMessage 通信失败:", e);
+                console.warn("⚠️ postMessage 失败:", e);
             }
 
+            // 2. 显示成功信息，延迟关闭（给插件轮询检测留出时间）
             document.body.innerHTML = `
-        <h2>授权成功！</h2>
-        <p>未检测到插件窗口，请手动复制授权码：</p>
-        <pre>${code}</pre>
+        <h2>✅ 授权成功！</h2>
+        <p>正在通知插件，请稍候...</p>
+        <p style="color:#999;font-size:12px;">如果插件未响应，请手动复制授权码：</p>
+        <pre style="background:#f5f5f5;padding:8px;border-radius:4px;">${code}</pre>
       `;
+
+            // 🔑 关键：延迟 3 秒再尝试关闭，让插件轮询能检测到 URL
+            setTimeout(() => {
+                try {
+                    // 再次尝试通知
+                    if (window.opener && !window.opener.closed) {
+                        window.opener.postMessage({type: "oauth_code", code}, "*");
+                    }
+                } catch (e) {
+                }
+
+                // 尝试关闭窗口
+                try {
+                    window.close();
+                } catch {
+                }
+            }, 3000);
         });
     </script>
 </head>
